@@ -1,0 +1,348 @@
+<!-- html/myPortfolio.html — 추가 페이지 (연습장 넘기기) -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="불편함을 발견하면 직접 만들어 본 프로젝트 기록.">
+  <title>포트폴리오 — Inwoo.log</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Space+Mono:wght@400;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="../media/icon/favicon.svg">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="page-portfolio">
+
+  <a class="skip" href="#main">본문으로 건너뛰기</a>
+
+  <header class="topbar">
+    <a class="topbar__logo" href="index.html">inwoo<span>.log</span></a>
+
+    <button type="button" class="nav-toggle" id="navToggle" aria-label="메뉴 열기" aria-expanded="false" aria-controls="siteNav">
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav class="topbar__nav" id="siteNav" aria-label="주요 메뉴">
+      <ul class="nav-list">
+        <li><a href="myProfile.html">Profile</a></li>
+        <li><a href="myPortfolio.html" class="is-active" aria-current="page">Portfolio</a></li>
+        <li><a href="myCalendar.html">Calendar</a></li>
+        <li><a href="myTrip.html">Trip</a></li>
+        <li><a href="myReadings.html">Reading</a></li>
+        <li><a href="guestbook.html">Guestbook</a></li>
+      </ul>
+    </nav>
+
+    <div class="topbar__auth" id="authArea">
+      <a href="login.html" class="btn btn--ghost">로그인</a>
+      <a href="signUp.html" class="btn btn--primary">회원가입</a>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <nav class="crumb" aria-label="현재 위치">
+      <a href="index.html">홈</a> <span aria-hidden="true">/</span> <span>포트폴리오</span>
+    </nav>
+
+    <header class="page-head">
+      <p class="eyebrow">기획서에서 멈추지 않은 것들</p>
+      <h1 class="page-title">불편한 걸 발견하면 <em>일단 만들어 봅니다</em></h1>
+      <p class="page-desc">
+        손으로 쓰던 급여명세서, 흩어져 있던 경제 지표, 공부하려고 만든 문제집 앱.
+        쓰는 사람을 먼저 보고, 대개는 직접 만들어 보는 데까지 갔습니다.
+      </p>
+    </header>
+
+    <main id="main">
+
+      <div class="note-shelf">
+
+      <!-- ===================== 팀 프로젝트 연습장 ===================== -->
+      <section class="note-wrap">
+        <h2 class="section-title">함께 만든 프로젝트</h2>
+
+        <div class="note note--team" data-note>
+          <div class="note__rings" aria-hidden="true">
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
+          </div>
+
+          <div class="note__body">
+
+            <!-- 표지 : 목차 -->
+            <article class="note__page is-current" data-page="0"
+                     aria-label="팀 프로젝트 목차">
+              <h3 class="note__cover-title">Team<br>Projects</h3>
+              <ol class="toc">
+                <li>
+                  <button type="button" class="toc__btn" data-goto="1">
+                    <span class="toc__no">01</span>
+                    <span class="toc__title">퀴켓 — 퀴즈 학습 앱</span>
+                    <span class="toc__year">2026</span>
+                  </button>
+                </li>
+                <li>
+                  <button type="button" class="toc__btn" data-goto="2">
+                    <span class="toc__no">02</span>
+                    <span class="toc__title">급여명세서 작성 자동화 서비스</span>
+                    <span class="toc__year">2024~</span>
+                  </button>
+                </li>
+                <li>
+                  <button type="button" class="toc__btn" data-goto="3">
+                    <span class="toc__no">03</span>
+                    <span class="toc__title">에이링크 — AI 링크·QR 북마크</span>
+                    <span class="toc__year">2025</span>
+                  </button>
+                </li>
+              </ol>
+            </article>
+
+            <!-- 01 -->
+            <article class="note__page" data-page="1" hidden>
+              <p class="chip chip--ko">01 · Team · 7인</p>
+              <h3>퀴켓 — 퀴즈 학습 앱</h3>
+              <p class="note__meta">2026.03 ~ 2026.07 · 기획 담당</p>
+
+              <p>직접 만든 문제로 공부하는 모바일 앱입니다.
+                 일곱 명이 넉 달간 만들어 스토어에 올렸습니다.</p>
+
+              <figure class="note__shot">
+                <img src="../media/portfolio/quiket-card.png"
+                     alt="앱스토어에 출시된 퀴켓 — AI 퀴즈 생성, 시험 공부 앱 페이지. 평점 5.0"
+                     width="1000" height="602" loading="lazy">
+                <figcaption>App Store에 출시된 퀴켓 v1.5 · 교육 카테고리</figcaption>
+              </figure>
+
+              <h4>내가 한 일</h4>
+              <ul class="note__list">
+                <li>사용자 인터뷰 12건을 진행해 문제 정의를 다시 씀</li>
+                <li>화면 흐름과 기능 명세 작성, 개발자 4명과 스프린트 운영</li>
+                <li>스토어 심사 대응 및 출시 후 지표 확인</li>
+              </ul>
+
+              <h4>배운 것</h4>
+              <p>기능을 줄이는 결정이 늘리는 결정보다 어렵다는 걸 알았습니다.</p>
+
+              <ul class="tag-row">
+                <li class="tag tag--sky">기획</li>
+                <li class="tag tag--lime">사용자 조사</li>
+                <li class="tag tag--peach">스토어 출시</li>
+              </ul>
+            </article>
+
+            <!-- 02 -->
+            <article class="note__page" data-page="2" hidden>
+              <p class="chip chip--ko">02 · Team · 진행 중</p>
+              <h3>급여명세서 작성 자동화 서비스</h3>
+              <p class="note__meta">2024.06 ~ 진행 중 · 서비스 기획</p>
+
+              <p>취득신고와 급여명세서 작성을 자동화하는 서비스를 설계했습니다.
+                 계산 로직부터 유저·어드민 플로우까지 함께 정리했습니다.</p>
+
+              <h4>내가 한 일</h4>
+              <ul class="note__list">
+                <li>급여·공제 계산 로직 정의 — 예외 케이스까지 규칙으로 문서화</li>
+                <li>유저/어드민 화면 흐름과 UI·UX 설계</li>
+                <li>취득신고 자동화 프로세스 설계</li>
+              </ul>
+
+              <h4>배운 것</h4>
+              <p>계산이 얽힌 서비스는 예외 케이스 정의가 곧 기획의 절반입니다.</p>
+
+              <ul class="tag-row">
+                <li class="tag tag--lavender">서비스 기획</li>
+                <li class="tag tag--sky">계산 로직</li>
+                <li class="tag tag--pink">UI·UX</li>
+              </ul>
+            </article>
+
+            <!-- 03 -->
+            <article class="note__page" data-page="3" hidden>
+              <p class="chip chip--ko">03 · Team · 2인</p>
+              <h3>에이링크 — AI 링크·QR 북마크</h3>
+              <p class="note__meta">2025 · 기획 및 개발</p>
+
+              <p>링크와 QR코드를 한곳에 모으는 북마크 서비스입니다.
+                 웹과 앱을 통합했고, 포털 검색도 한 화면에서 해결합니다.</p>
+
+              <h4>주요 기능</h4>
+              <ul class="note__list">
+                <li>링크를 추가하면 AI가 폴더 분류·링크명·설명·태그를 자동 생성</li>
+                <li>웹/앱 통합 북마크 + 포털 검색 기능 내장</li>
+                <li>링크에 할 일과 알림을 붙여 기록 관리</li>
+              </ul>
+
+              <h4>배운 것</h4>
+              <p>AI가 만든 분류를 사용자가 한 번에 고칠 수 있어야 신뢰가 생깁니다.</p>
+
+              <ul class="tag-row">
+                <li class="tag tag--sky">AI 분류</li>
+                <li class="tag tag--mint">웹·앱 통합</li>
+                <li class="tag tag--peach">북마크</li>
+              </ul>
+            </article>
+
+          </div>
+
+          <div class="note__controls">
+            <p class="note__count" aria-live="polite"></p>
+            <button type="button" class="note__back" data-back hidden>↩ 목록으로</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== 개인 프로젝트 연습장 ===================== -->
+      <section class="note-wrap">
+        <h2 class="section-title">혼자 시작한 프로젝트</h2>
+
+        <div class="note note--solo" data-note>
+          <div class="note__rings" aria-hidden="true">
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
+          </div>
+
+          <div class="note__body">
+
+            <article class="note__page is-current" data-page="0"
+                     aria-label="개인 프로젝트 목차">
+              <h3 class="note__cover-title">Personal<br>Projects</h3>
+              <ol class="toc">
+                <li>
+                  <button type="button" class="toc__btn" data-goto="1">
+                    <span class="toc__no">01</span>
+                    <span class="toc__title">Inwoo.log — 개인 기록 사이트</span>
+                    <span class="toc__year">2026</span>
+                  </button>
+                </li>
+                <li>
+                  <button type="button" class="toc__btn" data-goto="2">
+                    <span class="toc__no">02</span>
+                    <span class="toc__title">마켓데스크 — 경제공부 대시보드</span>
+                    <span class="toc__year">2025</span>
+                  </button>
+                </li>
+                <li>
+                  <button type="button" class="toc__btn" data-goto="3">
+                    <span class="toc__no">03</span>
+                    <span class="toc__title">더미 텍스트</span>
+                    <span class="toc__year">2024</span>
+                  </button>
+                </li>
+              </ol>
+            </article>
+
+            <article class="note__page" data-page="1" hidden>
+              <p class="chip">01 · Solo</p>
+              <h3>Inwoo.log — 개인 기록 사이트</h3>
+              <p class="note__meta">2026.07 · 기획 및 개발</p>
+
+              <p>지금 보고 계신 사이트입니다.
+                 순수 HTML, CSS, JavaScript만으로 만들었습니다.</p>
+
+              <h4>만들면서 정한 것</h4>
+              <ul class="note__list">
+                <li>색은 CSS 변수로만 관리하고 하드코딩하지 않기</li>
+                <li>사진이 없어도 읽히는 구조로 먼저 만들기</li>
+                <li>키보드만으로 모든 기능을 쓸 수 있게 하기</li>
+              </ul>
+
+              <h4>배운 것</h4>
+              <p>프레임워크 없이 만들어보니 브라우저가 원래 해주던 일이 보였습니다.</p>
+
+              <ul class="tag-row">
+                <li class="tag tag--lime">HTML</li>
+                <li class="tag tag--sky">CSS</li>
+                <li class="tag tag--peach">JavaScript</li>
+              </ul>
+            </article>
+
+            <article class="note__page" data-page="2" hidden>
+              <p class="chip">02 · Solo</p>
+              <h3>마켓데스크 — 경제공부 대시보드</h3>
+              <p class="note__meta">2025 · 기획 및 개발</p>
+
+              <p>경제 지표와 뉴스를 한 화면에서 훑으며 공부하려고 만든
+                 대시보드입니다. 아침 10분 루틴용으로 씁니다.</p>
+
+              <h4>만든 이유</h4>
+              <ul class="note__list">
+                <li>지표·환율·뉴스가 흩어져 있어 매일 탭을 여러 개 열어야 했음</li>
+                <li>봐야 할 것과 안 봐도 되는 것을 화면이 정해주길 원했음</li>
+              </ul>
+
+              <h4>배운 것</h4>
+              <p>대시보드 설계의 핵심은 보여줄 정보가 아니라 감출 정보를 고르는 일이었습니다.</p>
+
+              <ul class="tag-row">
+                <li class="tag tag--peach">대시보드</li>
+                <li class="tag tag--sky">데이터 시각화</li>
+                <li class="tag tag--lavender">경제 공부</li>
+              </ul>
+            </article>
+
+            <article class="note__page" data-page="3" hidden>
+              <p class="chip">03 · Solo</p>
+              <h3>더미 텍스트</h3>
+              <p class="note__meta">2024 · 기획 및 개발</p>
+
+              <p>여기에 다음 프로젝트 소개가 들어갈 예정입니다.</p>
+
+              <h4>내가 한 일</h4>
+              <ul class="note__list">
+                <li>더미 텍스트 — 내용을 채워 주세요</li>
+                <li>더미 텍스트 — 내용을 채워 주세요</li>
+              </ul>
+
+              <h4>배운 것</h4>
+              <p>더미 텍스트 — 내용을 채워 주세요.</p>
+
+              <ul class="tag-row">
+                <li class="tag tag--mint">더미</li>
+                <li class="tag tag--sky">텍스트</li>
+              </ul>
+            </article>
+
+          </div>
+
+          <div class="note__controls">
+            <p class="note__count" aria-live="polite"></p>
+            <button type="button" class="note__back" data-back hidden>↩ 목록으로</button>
+          </div>
+        </div>
+      </section>
+
+      </div>
+
+    </main>
+  </div>
+
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+      <div>
+        <p class="site-footer__brand">inwoo<span>.log</span></p>
+        <p class="site-footer__desc">
+          이 사이트는 SKALA 4기 Full-stack Engineering 수업 과제로 제작한
+          개인 포트폴리오입니다.
+        </p>
+      </div>
+      <ul class="site-footer__links">
+        <li><a href="mailto:roseprincess0331@gmail.com">이메일</a></li>
+        <li><a href="https://github.com" target="_blank" rel="noopener">GitHub</a></li>
+        <li><a href="signUp.html">회원가입</a></li>
+        <li><a href="guestbook.html">방명록</a></li>
+      </ul>
+    </div>
+    <p class="site-footer__copy">© 2026 장인우 · SKALA 4기</p>
+  </footer>
+
+  <script src="../script/auth.js"></script>
+  <script src="../script/nav.js"></script>
+  <script src="../script/portfolio.js"></script>
+</body>
+</html>

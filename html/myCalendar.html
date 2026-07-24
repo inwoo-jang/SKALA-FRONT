@@ -1,0 +1,207 @@
+<!-- html/myCalendar.html — 나의 일정 -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="SKALA 수업 일정과 쉬는 날 루틴을 담은 달력.">
+  <title>나의 일정 — Inwoo.log</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Space+Mono:wght@400;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="../media/icon/favicon.svg">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="page-calendar">
+
+  <a class="skip" href="#main">본문으로 건너뛰기</a>
+
+  <header class="topbar">
+    <a class="topbar__logo" href="index.html">inwoo<span>.log</span></a>
+
+    <button type="button" class="nav-toggle" id="navToggle" aria-label="메뉴 열기" aria-expanded="false" aria-controls="siteNav">
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav class="topbar__nav" id="siteNav" aria-label="주요 메뉴">
+      <ul class="nav-list">
+        <li><a href="myProfile.html">Profile</a></li>
+        <li><a href="myPortfolio.html">Portfolio</a></li>
+        <li><a href="myCalendar.html" class="is-active" aria-current="page">Calendar</a></li>
+        <li><a href="myTrip.html">Trip</a></li>
+        <li><a href="myReadings.html">Reading</a></li>
+        <li><a href="guestbook.html">Guestbook</a></li>
+      </ul>
+    </nav>
+
+    <div class="topbar__auth" id="authArea">
+      <a href="login.html" class="btn btn--ghost">로그인</a>
+      <a href="signUp.html" class="btn btn--primary">회원가입</a>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <nav class="crumb" aria-label="현재 위치">
+      <a href="index.html">홈</a> <span aria-hidden="true">/</span> <span>나의 일정</span>
+    </nav>
+
+    <header class="page-head">
+      <p class="eyebrow">월간 플래너</p>
+      <h1 class="page-title">배움과 쉼을 담은 <em>이번 달</em></h1>
+      <p class="page-desc">
+        날짜를 누르면 그날의 기록으로 이동합니다.
+        평일은 강의 시간표로, 주말은 휴일 기록으로 연결됩니다.
+      </p>
+    </header>
+
+    <main id="main">
+      <div class="cal-layout">
+
+        <!-- ===== 달력 ===== -->
+        <section class="cal" aria-label="월간 달력">
+
+          <div class="cal-head">
+            <button type="button" id="prevMonth" class="cal-head__btn"
+                    aria-label="이전 달">←</button>
+            <h2 id="calTitle" class="cal-title">2026년 7월</h2>
+            <button type="button" id="nextMonth" class="cal-head__btn"
+                    aria-label="다음 달">→</button>
+          </div>
+
+          <div class="cal-weekday" aria-hidden="true">
+            <span>일</span><span>월</span><span>화</span>
+            <span>수</span><span>목</span><span>금</span><span>토</span>
+          </div>
+
+          <div class="cal-grid" id="calGrid">
+            <p>달력을 불러오는 중입니다.</p>
+          </div>
+
+          <p class="cal-legend">
+            <span class="legend-item legend-item--class">수업일</span>
+            <span class="legend-item legend-item--holiday">휴일</span>
+            <span class="legend-item legend-item--today">오늘</span>
+            <span class="legend-item legend-item--selected">선택</span>
+          </p>
+        </section>
+
+        <!-- ===== 사이드 ===== -->
+        <aside class="cal-side" aria-label="오늘과 반복 일정">
+
+          <section class="cal-side__block cal-side__block--today">
+            <p class="chip" id="sideBadge">Today</p>
+            <p class="cal-today__date" id="sideToday">날짜를 불러오는 중입니다.</p>
+            <div class="cal-today__body" id="sideSchedule">
+              <p>날짜를 누르면 그날의 일정이 표시됩니다.</p>
+            </div>
+          </section>
+
+          <section class="cal-side__block">
+            <h3 class="cal-side__title">전체 강의 일정</h3>
+            <p class="cal-side__desc">
+              평일 09:00 ~ 18:00, 다섯 과목이 요일마다 번갈아 진행됩니다.
+            </p>
+            <p><a href="myClass.html" class="btn btn--ghost btn--block" id="classLink">주간 시간표 보기</a></p>
+          </section>
+
+          <section class="cal-side__block" id="blockWeekday">
+            <h3 class="cal-side__title">평일 기본 루틴</h3>
+            <ol class="routine-list">
+              <li>
+                <span class="routine-list__time">06:30</span>
+                <span class="routine-list__what">기상</span>
+              </li>
+              <li>
+                <span class="routine-list__time">07:30</span>
+                <span class="routine-list__what">집에서 출발</span>
+              </li>
+              <li>
+                <span class="routine-list__time">09:00</span>
+                <span class="routine-list__what">SKALA 수업 — 18:00까지</span>
+              </li>
+              <li>
+                <span class="routine-list__time">19:30</span>
+                <span class="routine-list__what">집 도착 · 저녁 식사</span>
+              </li>
+              <li>
+                <span class="routine-list__time">20:30</span>
+                <span class="routine-list__what">씻기</span>
+              </li>
+              <li>
+                <span class="routine-list__time">21:00</span>
+                <span class="routine-list__what">복습 및 자격증 공부</span>
+              </li>
+              <li>
+                <span class="routine-list__time">23:30</span>
+                <span class="routine-list__what">취침</span>
+              </li>
+            </ol>
+          </section>
+
+          <section class="cal-side__block" id="blockHoliday" hidden>
+            <h3 class="cal-side__title">휴일 기본 루틴</h3>
+            <ol class="routine-list">
+              <li>
+                <span class="routine-list__time">10:30</span>
+                <span class="routine-list__what">늦잠 후 기상 · 스트레칭</span>
+              </li>
+              <li>
+                <span class="routine-list__time">11:00</span>
+                <span class="routine-list__what">브런치</span>
+              </li>
+              <li>
+                <span class="routine-list__time">13:00</span>
+                <span class="routine-list__what">헬스장 — 유산소와 웨이트</span>
+              </li>
+              <li>
+                <span class="routine-list__time">15:00</span>
+                <span class="routine-list__what">카페에서 독서 또는 공부</span>
+              </li>
+              <li>
+                <span class="routine-list__time">18:00</span>
+                <span class="routine-list__what">친구 또는 가족들과 저녁</span>
+              </li>
+              <li>
+                <span class="routine-list__time">21:00</span>
+                <span class="routine-list__what">방 청소 · 다음 주 일정 정리</span>
+              </li>
+              <li>
+                <span class="routine-list__time">23:30</span>
+                <span class="routine-list__what">취침</span>
+              </li>
+            </ol>
+            <p><a href="myHoliday.html" class="btn btn--ghost btn--block">휴일 일과 보기</a></p>
+          </section>
+
+        </aside>
+
+      </div>
+    </main>
+  </div>
+
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+      <div>
+        <p class="site-footer__brand">inwoo<span>.log</span></p>
+        <p class="site-footer__desc">
+          이 사이트는 SKALA 4기 Full-stack Engineering 수업 과제로 제작한
+          개인 포트폴리오입니다.
+        </p>
+      </div>
+      <ul class="site-footer__links">
+        <li><a href="mailto:roseprincess0331@gmail.com">이메일</a></li>
+        <li><a href="https://github.com" target="_blank" rel="noopener">GitHub</a></li>
+        <li><a href="signUp.html">회원가입</a></li>
+        <li><a href="guestbook.html">방명록</a></li>
+      </ul>
+    </div>
+    <p class="site-footer__copy">© 2026 장인우 · SKALA 4기</p>
+  </footer>
+
+  <script src="../script/auth.js"></script>
+  <script src="../script/nav.js"></script>
+  <script src="../script/calendar.js"></script>
+</body>
+</html>

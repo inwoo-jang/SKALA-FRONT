@@ -1,0 +1,129 @@
+<!-- html/guestbook.html — 추가 페이지 (로그인 사용자 방명록) -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Inwoo.log 방문 흔적을 남기는 방명록.">
+  <title>방명록 — Inwoo.log</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Space+Mono:wght@400;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="../media/icon/favicon.svg">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+  <a class="skip" href="#main">본문으로 건너뛰기</a>
+
+  <header class="topbar">
+    <a class="topbar__logo" href="index.html">inwoo<span>.log</span></a>
+
+    <button type="button" class="nav-toggle" id="navToggle" aria-label="메뉴 열기" aria-expanded="false" aria-controls="siteNav">
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav class="topbar__nav" id="siteNav" aria-label="주요 메뉴">
+      <ul class="nav-list">
+        <li><a href="myProfile.html">Profile</a></li>
+        <li><a href="myPortfolio.html">Portfolio</a></li>
+        <li><a href="myCalendar.html">Calendar</a></li>
+        <li><a href="myTrip.html">Trip</a></li>
+        <li><a href="myReadings.html">Reading</a></li>
+        <li><a href="guestbook.html" class="is-active" aria-current="page">Guestbook</a></li>
+      </ul>
+    </nav>
+
+    <div class="topbar__auth" id="authArea">
+      <a href="login.html" class="btn btn--ghost">로그인</a>
+      <a href="signUp.html" class="btn btn--primary">회원가입</a>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <nav class="crumb" aria-label="현재 위치">
+      <a href="index.html">홈</a> <span aria-hidden="true">/</span> <span>방명록</span>
+    </nav>
+
+    <header class="page-head">
+      <h1 class="page-title">다녀간 <em>흔적</em>을 남겨주세요 💬</h1>
+      <p class="page-desc">
+        스팸을 막기 위해 로그인한 방문자만 글을 남길 수 있습니다.
+        남긴 글은 이 브라우저에 저장됩니다.
+      </p>
+    </header>
+
+    <main id="main">
+
+      <!-- 로그인 전 안내 -->
+      <section class="panel gb-locked" id="gbLocked">
+        <h2>방명록을 남기려면 로그인이 필요합니다 🔒</h2>
+        <p>계정이 없으시면 회원가입 후 로그인해 주세요.</p>
+        <p class="btn-row">
+          <a href="login.html" class="btn btn--primary">로그인하기</a>
+          <a href="signUp.html" class="btn btn--ghost">회원가입</a>
+        </p>
+      </section>
+
+      <!-- 로그인 후 작성 폼 -->
+      <section class="panel gb-write" id="gbWrite" hidden>
+        <h2 class="section-title">Write</h2>
+
+        <form class="gb-form" id="gbForm">
+          <p class="field">
+            <label for="gbName">이름</label>
+            <input type="text" id="gbName" name="gbName" readonly>
+          </p>
+
+          <p class="field">
+            <label for="gbMessage">메시지</label>
+            <textarea id="gbMessage" name="gbMessage" rows="4"
+                      maxlength="200" required
+                      placeholder="짧게라도 한 줄 남겨주세요. (최대 200자)"></textarea>
+            <span class="field__count" id="gbCount">0 / 200</span>
+          </p>
+
+          <p class="form-actions">
+            <button type="submit" class="btn btn--primary">남기기</button>
+            <button type="reset" class="btn btn--ghost">지우기</button>
+          </p>
+        </form>
+      </section>
+
+      <!-- 목록 -->
+      <section class="panel">
+        <h2 class="section-title">Entries <span id="gbTotal">0</span></h2>
+        <ul class="gb-list" id="gbList"></ul>
+        <p class="gb-empty" id="gbEmpty">아직 남겨진 글이 없습니다. 첫 번째 방문자가 되어주세요 🌱</p>
+        <p class="gb-more" id="gbMore" hidden></p>
+      </section>
+
+    </main>
+  </div>
+
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+      <div>
+        <p class="site-footer__brand">inwoo<span>.log</span></p>
+        <p class="site-footer__desc">
+          이 사이트는 SKALA 4기 Full-stack Engineering 수업 과제로 제작한
+          개인 포트폴리오입니다.
+        </p>
+      </div>
+      <ul class="site-footer__links">
+        <li><a href="mailto:roseprincess0331@gmail.com">이메일</a></li>
+        <li><a href="https://github.com" target="_blank" rel="noopener">GitHub</a></li>
+        <li><a href="signUp.html">회원가입</a></li>
+        <li><a href="guestbook.html">방명록</a></li>
+      </ul>
+    </div>
+    <p class="site-footer__copy">© 2026 장인우 · SKALA 4기</p>
+  </footer>
+
+  <script src="../script/auth.js"></script>
+  <script src="../script/nav.js"></script>
+  <script src="../script/guestbook.js"></script>
+</body>
+</html>

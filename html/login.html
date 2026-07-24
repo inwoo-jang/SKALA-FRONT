@@ -1,0 +1,117 @@
+<!-- html/login.html — 추가 페이지 -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Inwoo.log 로그인 페이지.">
+  <title>로그인 — Inwoo.log</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Space+Mono:wght@400;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="../media/icon/favicon.svg">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+  <a class="skip" href="#main">본문으로 건너뛰기</a>
+
+  <header class="topbar">
+    <a class="topbar__logo" href="index.html">inwoo<span>.log</span></a>
+
+    <button type="button" class="nav-toggle" id="navToggle" aria-label="메뉴 열기" aria-expanded="false" aria-controls="siteNav">
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav class="topbar__nav" id="siteNav" aria-label="주요 메뉴">
+      <ul class="nav-list">
+        <li><a href="myProfile.html">Profile</a></li>
+        <li><a href="myPortfolio.html">Portfolio</a></li>
+        <li><a href="myCalendar.html">Calendar</a></li>
+        <li><a href="myTrip.html">Trip</a></li>
+        <li><a href="myReadings.html">Reading</a></li>
+        <li><a href="guestbook.html">Guestbook</a></li>
+      </ul>
+    </nav>
+
+    <div class="topbar__auth" id="authArea">
+      <a href="login.html" class="btn btn--ghost">로그인</a>
+      <a href="signUp.html" class="btn btn--primary">회원가입</a>
+    </div>
+  </header>
+
+  <div class="container container--narrow">
+
+    <header class="page-head">
+      <h1 class="page-title">🔐 <em>로그인</em></h1>
+      <p class="page-desc">댓글 작성 등 회원 기능을 이용하려면 로그인해 주세요.</p>
+    </header>
+
+    <main id="main">
+      <section class="panel">
+        <form action="index.html" method="get" class="auth-form" id="loginForm">
+
+          <fieldset>
+            <legend>계정 정보</legend>
+
+            <p class="field">
+              <label for="loginId">아이디</label>
+              <input type="text" id="loginId" name="loginId"
+                     placeholder="아이디 입력"
+                     autocomplete="username" required>
+            </p>
+
+            <p class="field">
+              <label for="loginPw">비밀번호</label>
+              <input type="password" id="loginPw" name="loginPw"
+                     placeholder="비밀번호 입력"
+                     autocomplete="current-password" required>
+            </p>
+
+            <p class="field field--check">
+              <input type="checkbox" id="rememberId" name="rememberId">
+              <label for="rememberId">아이디 저장</label>
+            </p>
+
+            <p class="field__msg" id="loginMsg" role="status"></p>
+          </fieldset>
+
+          <p class="form-actions">
+            <button type="submit" class="btn btn--primary">로그인</button>
+            <button type="reset" class="btn btn--ghost">다시 입력</button>
+          </p>
+        </form>
+
+        <p class="auth-note">※ 서버 없이 브라우저에만 저장되는 데모 로그인입니다.</p>
+
+        <p class="auth-link">
+          아직 회원이 아니라면 <a href="signUp.html">회원가입</a>
+        </p>
+      </section>
+    </main>
+  </div>
+
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+      <div>
+        <p class="site-footer__brand">inwoo<span>.log</span></p>
+        <p class="site-footer__desc">
+          이 사이트는 SKALA 4기 Full-stack Engineering 수업 과제로 제작한
+          개인 포트폴리오입니다.
+        </p>
+      </div>
+      <ul class="site-footer__links">
+        <li><a href="mailto:roseprincess0331@gmail.com">이메일</a></li>
+        <li><a href="https://github.com" target="_blank" rel="noopener">GitHub</a></li>
+        <li><a href="signUp.html">회원가입</a></li>
+        <li><a href="guestbook.html">방명록</a></li>
+      </ul>
+    </div>
+    <p class="site-footer__copy">© 2026 장인우 · SKALA 4기</p>
+  </footer>
+
+  <script src="../script/auth.js"></script>
+  <script src="../script/nav.js"></script>
+</body>
+</html>

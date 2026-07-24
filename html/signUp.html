@@ -1,0 +1,223 @@
+<!-- html/signUp.html — 회원가입 -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Inwoo.log 회원가입 페이지.">
+  <title>회원가입 — Inwoo.log</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Space+Mono:wght@400;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="../media/icon/favicon.svg">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+  <a class="skip" href="#main">본문으로 건너뛰기</a>
+
+  <header class="topbar">
+    <a class="topbar__logo" href="index.html">inwoo<span>.log</span></a>
+
+    <button type="button" class="nav-toggle" id="navToggle" aria-label="메뉴 열기" aria-expanded="false" aria-controls="siteNav">
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav class="topbar__nav" id="siteNav" aria-label="주요 메뉴">
+      <ul class="nav-list">
+        <li><a href="myProfile.html">Profile</a></li>
+        <li><a href="myPortfolio.html">Portfolio</a></li>
+        <li><a href="myCalendar.html">Calendar</a></li>
+        <li><a href="myTrip.html">Trip</a></li>
+        <li><a href="myReadings.html">Reading</a></li>
+        <li><a href="guestbook.html">Guestbook</a></li>
+      </ul>
+    </nav>
+
+    <div class="topbar__auth" id="authArea">
+      <a href="login.html" class="btn btn--ghost">로그인</a>
+      <a href="signUp.html" class="btn btn--primary">회원가입</a>
+    </div>
+  </header>
+
+  <div class="container container--narrow">
+
+    <header class="page-head">
+      <h1 class="page-title">👤 Inwoo.log <em>회원가입</em></h1>
+      <p class="page-desc">Inwoo.log에 오신 것을 환영합니다! 아래 정보를 차근차근 입력해 주세요.</p>
+    </header>
+
+    <main id="main">
+      <section class="panel">
+        <form action="signUpResult.html" method="get" class="auth-form">
+
+          <fieldset>
+            <legend>계정 정보</legend>
+
+            <p class="field">
+              <label for="userId">아이디</label>
+              <input type="text" id="userId" name="userId"
+                     placeholder="4~15자 영문/숫자"
+                     minlength="4" maxlength="15" required>
+            </p>
+
+            <p class="field">
+              <label for="userPassword">비밀번호</label>
+              <input type="password" id="userPassword" name="userPassword"
+                     placeholder="8~20자 입력"
+                     minlength="8" maxlength="20"
+                     pattern="(?=.*[A-Za-z])(?=.*[0-9])(?=.*[^A-Za-z0-9]).{8,20}"
+                     title="영문, 숫자, 특수문자를 각각 1개 이상 포함한 8~20자로 입력하세요."
+                     autocomplete="new-password" required>
+              <small class="field__hint">*영문, 숫자, 특수문자를 각각 1개 이상 포함한 8~20자로 입력하세요.</small>
+            </p>
+
+            <p class="field">
+              <label for="userPasswordConfirm">비밀번호 확인</label>
+              <input type="password" id="userPasswordConfirm" name="userPasswordConfirm"
+                     placeholder="비밀번호를 다시 입력"
+                     minlength="8" maxlength="20"
+                     autocomplete="new-password" required>
+            </p>
+
+            <p class="field">
+              <label for="userEmail">이메일</label>
+              <span class="field-email">
+                <input type="text" id="userEmail" name="userEmail"
+                       placeholder="example" required>
+                <span class="field-email__at" aria-hidden="true">@</span>
+                <select id="emailDomain" name="emailDomain"
+                        aria-label="이메일 도메인" required>
+                  <option value="">선택하세요</option>
+                  <option value="naver.com">naver.com</option>
+                  <option value="gmail.com">gmail.com</option>
+                  <option value="daum.net">daum.net</option>
+                  <option value="direct">직접입력</option>
+                </select>
+              </span>
+              <input type="text" id="emailDomainDirect" name="emailDomainDirect"
+                     aria-label="이메일 도메인 직접 입력"
+                     placeholder="example.com" hidden disabled>
+            </p>
+          </fieldset>
+
+          <fieldset>
+            <legend>개인 프로필 정보</legend>
+
+            <p class="field">
+              <label for="userName">이름</label>
+              <input type="text" id="userName" name="userName"
+                     placeholder="이름 입력" required>
+            </p>
+
+            <p class="field">
+              <label for="userBirth">생년월일</label>
+              <input type="date" id="userBirth" name="userBirth"
+                     value="2000-01-01" required>
+            </p>
+
+            <fieldset class="field-group">
+              <legend>성별</legend>
+              <span class="check-row">
+                <input type="radio" id="genderMale" name="gender" value="male">
+                <label for="genderMale">남성</label>
+              </span>
+              <span class="check-row">
+                <input type="radio" id="genderFemale" name="gender" value="female">
+                <label for="genderFemale">여성</label>
+              </span>
+              <span class="check-row">
+                <input type="radio" id="genderNone" name="gender" value="none" checked>
+                <label for="genderNone">선택 안 함</label>
+              </span>
+            </fieldset>
+
+            <fieldset class="field-group">
+              <legend>관심 분야 (복수 선택 가능)</legend>
+              <span class="check-row check-row--block">
+                <input type="checkbox" id="intFrontend" name="interest" value="frontend">
+                <label for="intFrontend">웹 프론트엔드 (Vue.js/HTML)</label>
+              </span>
+              <span class="check-row check-row--block">
+                <input type="checkbox" id="intUiUx" name="interest" value="ui-ux">
+                <label for="intUiUx">UI/UX 디자인 표준</label>
+              </span>
+              <span class="check-row check-row--block">
+                <input type="checkbox" id="intBackend" name="interest" value="backend-database">
+                <label for="intBackend">백엔드/데이터베이스</label>
+              </span>
+              <span class="check-row check-row--block">
+                <input type="checkbox" id="intCloud" name="interest" value="cloud-infrastructure">
+                <label for="intCloud">클라우드/인프라</label>
+              </span>
+              <span class="check-row check-row--block">
+                <input type="checkbox" id="intAi" name="interest" value="ai">
+                <label for="intAi">AI/머신러닝</label>
+              </span>
+              <span class="check-row check-row--block">
+                <input type="checkbox" id="intData" name="interest" value="data-analysis">
+                <label for="intData">데이터 분석</label>
+              </span>
+              <span class="check-row check-row--block">
+                <input type="checkbox" id="intPm" name="interest" value="service-planning">
+                <label for="intPm">서비스 기획/PM</label>
+              </span>
+              <span class="check-row check-row--block check-row--inline-input">
+                <input type="checkbox" id="otherInterest" name="interest" value="other">
+                <label for="otherInterest">직접 입력:</label>
+                <input type="text" id="interestOther" name="interestOther"
+                       aria-label="기타 관심 분야"
+                       placeholder="관심 분야를 입력하세요" disabled>
+              </span>
+            </fieldset>
+          </fieldset>
+
+          <fieldset>
+            <legend>가입동기</legend>
+
+            <p class="field">
+              <label for="introduction">가입하는 동기 또는 가입 인사</label>
+              <textarea id="introduction" name="introduction" rows="5"
+                        maxlength="200"
+                        placeholder="여기에 내용을 입력하세요 (최대 200자)"></textarea>
+            </p>
+          </fieldset>
+
+          <p class="form-actions">
+            <input type="submit" value="회원가입">
+            <input type="reset" value="다시 작성">
+          </p>
+        </form>
+
+        <p class="auth-link">
+          이미 계정이 있으신가요? <a href="login.html">로그인하기</a>
+        </p>
+      </section>
+    </main>
+  </div>
+
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+      <div>
+        <p class="site-footer__brand">inwoo<span>.log</span></p>
+        <p class="site-footer__desc">
+          이 사이트는 SKALA 4기 Full-stack Engineering 수업 과제로 제작한
+          개인 포트폴리오입니다.
+        </p>
+      </div>
+      <ul class="site-footer__links">
+        <li><a href="mailto:roseprincess0331@gmail.com">이메일</a></li>
+        <li><a href="https://github.com" target="_blank" rel="noopener">GitHub</a></li>
+        <li><a href="signUp.html">회원가입</a></li>
+        <li><a href="guestbook.html">방명록</a></li>
+      </ul>
+    </div>
+    <p class="site-footer__copy">© 2026 장인우 · SKALA 4기</p>
+  </footer>
+
+  <script src="../script/auth.js"></script>
+  <script src="../script/nav.js"></script>
+  <script src="../script/signUp.js"></script>
+</body>
+</html>

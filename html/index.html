@@ -1,0 +1,577 @@
+<!-- html/index.html — 메인 페이지 -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="장인우의 개인 기록 공간 Inwoo.log — 프로필, 포트폴리오, 여행일지, 독서 기록을 담았습니다.">
+  <title>INWOOLOG</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Space+Mono:wght@400;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="../media/icon/favicon.svg">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+  <a class="skip" href="#main">본문으로 건너뛰기</a>
+
+  <header class="topbar">
+    <a class="topbar__logo" href="index.html">inwoo<span>.log</span></a>
+
+    <button type="button" class="nav-toggle" id="navToggle" aria-label="메뉴 열기" aria-expanded="false" aria-controls="siteNav">
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav class="topbar__nav" id="siteNav" aria-label="주요 메뉴">
+      <ul class="nav-list">
+        <li><a href="myProfile.html">Profile</a></li>
+        <li><a href="myPortfolio.html">Portfolio</a></li>
+        <li><a href="myCalendar.html">Calendar</a></li>
+        <li><a href="myTrip.html">Trip</a></li>
+        <li><a href="myReadings.html">Reading</a></li>
+        <li><a href="guestbook.html">Guestbook</a></li>
+      </ul>
+    </nav>
+
+    <div class="topbar__auth" id="authArea">
+      <a href="login.html" class="btn btn--ghost">로그인</a>
+      <a href="signUp.html" class="btn btn--primary">회원가입</a>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <!-- ===== 히어로 : 벤토 그리드 ===== -->
+    <section class="bento" aria-labelledby="heroTitle">
+
+      <article class="bento__cell bento__cell--intro">
+        <p class="hero-hi">안녕하세요, 장인우입니다</p>
+        <h1 class="hero-mark" id="heroTitle">
+          inwoo<span>.log</span><span class="hero-caret" aria-hidden="true"></span>
+        </h1>
+        <p class="hero-sub">
+          저에 대해 차곡차곡 남기는 공간이에요.
+          천천히 둘러보며 저를 알아가 보세요.
+        </p>
+      </article>
+
+      <article class="bento__cell bento__cell--slider">
+        <p class="chip">Recent trip</p>
+
+        <div class="slider" id="tripSlider">
+          <div class="slider__stage">
+            <ul class="slider__track" id="sliderTrack">
+              <li class="slider__item is-current">
+                <a class="slider__link" href="myTrip.html#tripPohang" aria-label="포항 여행 게시물 보러 가기">
+                  <img src="../media/trip/pohang.JPG" alt="포항 바닷가에서 푸른 바다를 사진으로 담는 모습">
+                </a>
+                <p class="slider__caption"><strong>포항 · 바다</strong> 2026.06.06</p>
+              </li>
+              <li class="slider__item">
+                <a class="slider__link" href="myTrip.html#tripBusan" aria-label="부산 여행 게시물 보러 가기">
+                  <img src="../media/trip/busan.jpeg" alt="밤에 불이 켜진 고층 건물과 해운대 해변 산책로" loading="lazy">
+                </a>
+                <p class="slider__caption"><strong>부산 · 해운대</strong> 2026.02.07 ~ 02.08</p>
+              </li>
+              <li class="slider__item">
+                <a class="slider__link" href="myTrip.html#tripSokcho" aria-label="속초 여행 게시물 보러 가기">
+                  <img src="../media/trip/sokcho5.jpeg" alt="구름 위로 떠오르는 2026년 속초의 첫 해" loading="lazy">
+                </a>
+                <p class="slider__caption"><strong>속초 · 해돋이</strong> 2026.01.01</p>
+              </li>
+              <li class="slider__item">
+                <a class="slider__link" href="myTrip.html#tripHokkaido" aria-label="홋카이도 여행 게시물 보러 가기">
+                  <img src="../media/trip/japan2.JPG" alt="청록빛 물과 마른 나무가 어우러진 비에이 청의 호수" loading="lazy">
+                </a>
+                <p class="slider__caption"><strong>일본 · 홋카이도</strong> 2025.09.26 ~ 09.27</p>
+              </li>
+              <li class="slider__item">
+                <a class="slider__link" href="myTrip.html#tripJeonju" aria-label="전주 여행 게시물 보러 가기">
+                  <img src="../media/trip/jeonju1.jpeg" alt="특별전시관 기와 대문 앞에 핀 보라색 버베나 꽃" loading="lazy">
+                </a>
+                <p class="slider__caption"><strong>전주 · 한옥마을</strong> 2024.08.10 ~ 08.11</p>
+              </li>
+            </ul>
+
+            <button type="button" class="slider__nav slider__nav--prev" id="slidePrev" aria-label="이전 사진">‹</button>
+            <button type="button" class="slider__nav slider__nav--next" id="slideNext" aria-label="다음 사진">›</button>
+          </div>
+
+          <div class="slider__foot">
+            <p class="slider__count" id="slideCount" aria-live="polite">1 / 3</p>
+            <a class="slider__more" href="myTrip.html">전체 보기 →</a>
+          </div>
+        </div>
+      </article>
+
+
+    </section>
+
+    <div class="layout">
+
+      <!-- ===== 본문 ===== -->
+      <main id="main">
+        <h2 class="home-title">바로가기</h2>
+
+        <ul class="index-list">
+          <li class="index-list__item">
+            <a href="myProfile.html">
+              <span class="index-list__no">01</span>
+              <span class="index-list__label">프로필</span>
+              <span class="index-list__desc">어떤 사람인지, 무엇을 좋아하는지</span>
+              <span class="index-list__arrow" aria-hidden="true">→</span>
+            </a>
+          </li>
+          <li class="index-list__item">
+            <a href="myPortfolio.html">
+              <span class="index-list__no">02</span>
+              <span class="index-list__label">포트폴리오</span>
+              <span class="index-list__desc">기획하고 직접 만들어 온 것들</span>
+              <span class="index-list__arrow" aria-hidden="true">→</span>
+            </a>
+          </li>
+          <li class="index-list__item">
+            <a href="myCalendar.html">
+              <span class="index-list__no">03</span>
+              <span class="index-list__label">나의 일정</span>
+              <span class="index-list__desc">이번 달 수업과 쉬는 날의 하루</span>
+              <span class="index-list__arrow" aria-hidden="true">→</span>
+            </a>
+          </li>
+          <li class="index-list__item">
+            <a href="myTrip.html">
+              <span class="index-list__no">04</span>
+              <span class="index-list__label">여행일지</span>
+              <span class="index-list__desc">사진과 영상으로 남긴 그날의 장면</span>
+              <span class="index-list__arrow" aria-hidden="true">→</span>
+            </a>
+          </li>
+          <li class="index-list__item">
+            <a href="myReadings.html">
+              <span class="index-list__no">05</span>
+              <span class="index-list__label">독서 기록</span>
+              <span class="index-list__desc">책장에서 꺼내 보는 밑줄들</span>
+              <span class="index-list__arrow" aria-hidden="true">→</span>
+            </a>
+          </li>
+        </ul>
+
+        <!-- ===== 방명록 미리보기 ===== -->
+        <h2 class="home-title">방명록</h2>
+
+        <section class="gb-teaser">
+          <ul class="gb-preview" id="gbPreview" data-preview="3">
+            <li>
+              <p class="gb-preview__msg">반가워요~ 다음에 또 들릴게요!</p>
+              <p class="gb-preview__meta">
+                <span class="gb-preview__name">수현</span>
+                <span class="gb-preview__time">2026.07.22</span>
+              </p>
+            </li>
+            <li>
+              <p class="gb-preview__msg">방콕 사진 대박. 왓아룬 보이는 식당 저도 가고 싶어요</p>
+              <p class="gb-preview__meta">
+                <span class="gb-preview__name">민준</span>
+                <span class="gb-preview__time">2026.07.19</span>
+              </p>
+            </li>
+            <li>
+              <p class="gb-preview__msg">독서 기록 보다가 넥서스가 인상적이었어요!</p>
+              <p class="gb-preview__meta">
+                <span class="gb-preview__name">지우</span>
+                <span class="gb-preview__time">2026.07.17</span>
+              </p>
+            </li>
+          </ul>
+
+          <a class="gb-preview__more" id="gbPreviewMore" href="guestbook.html" hidden>그 외 더 보기 →</a>
+
+          <p class="btn-row">
+            <button type="button" id="gbModalOpen" class="btn btn--primary">방명록 남기기 💬</button>
+            <a href="guestbook.html" class="btn btn--ghost">전체 방명록 보기</a>
+          </p>
+
+          <!-- 방명록 작성 모달 -->
+          <dialog class="gb-modal" id="gbModal" aria-labelledby="gbModalTitle">
+            <div class="gb-modal__head">
+              <h3 id="gbModalTitle">방명록 남기기 💬</h3>
+              <button type="button" class="gb-modal__close" id="gbModalClose" aria-label="닫기">×</button>
+            </div>
+
+            <!-- 로그인 상태 : 작성 폼 -->
+            <form id="gbModalForm" hidden>
+              <p class="field">
+                <label for="gbModalMsg">메시지</label>
+                <textarea id="gbModalMsg" rows="4" maxlength="200"
+                          placeholder="한 줄 남겨주세요 (최대 200자)" required></textarea>
+              </p>
+              <p class="gb-modal__count" id="gbModalCount">0 / 200</p>
+              <p class="form-actions">
+                <button type="submit" class="btn btn--primary">남기기</button>
+                <button type="button" class="btn btn--ghost" id="gbModalCancel">취소</button>
+              </p>
+            </form>
+
+            <!-- 비로그인 상태 : 로그인 안내 -->
+            <div id="gbModalLocked" hidden>
+              <p class="gb-modal__locked-text">
+                방명록 작성은 <strong>로그인한 방문자</strong>만 가능해요.
+              </p>
+              <p class="form-actions">
+                <a href="login.html" class="btn btn--primary">로그인</a>
+                <a href="signUp.html" class="btn btn--ghost">회원가입</a>
+              </p>
+            </div>
+          </dialog>
+        </section>
+      </main>
+
+      <!-- ===== 사이드바 : 한 블록으로 압축 ===== -->
+      <aside class="sidebar" aria-label="오늘의 정보">
+        <section class="panel">
+          <p class="chip">Today</p>
+
+          <p class="today-date" id="todayDate">날짜를 불러오는 중입니다.</p>
+          <div id="todaySchedule" class="today-schedule">
+            <p>오늘의 일정이 여기 표시됩니다.</p>
+          </div>
+
+          <hr class="panel__rule">
+
+          <p class="panel__label">실시간 날씨 보기</p>
+          <!-- 실제 값은 숨겨진 select가 들고, 화면에는 커스텀 메뉴만 보인다 -->
+          <select id="citySelect" class="city-select" tabindex="-1" aria-hidden="true">
+            <option value="37.5665,126.9780" selected>대한민국 · 서울</option>
+            <option value="35.1796,129.0756">대한민국 · 부산</option>
+            <option value="33.4996,126.5312">대한민국 · 제주</option>
+            <option value="38.2070,128.5918">대한민국 · 속초</option>
+            <option value="36.0190,129.3435">대한민국 · 포항</option>
+            <option value="13.7563,100.5018">태국 · 방콕</option>
+            <option value="31.2304,121.4737">중국 · 상하이</option>
+            <option value="43.0618,141.3545">일본 · 삿포로</option>
+            <option value="35.6762,139.6503">일본 · 도쿄</option>
+            <option value="48.8566,2.3522">프랑스 · 파리</option>
+            <option value="40.7128,-74.0060">미국 · 뉴욕</option>
+          </select>
+          <div id="weather-box">
+            <div class="weather-head">
+              <div class="weather-head__title">
+                <h4 id="weatherCity">대한민국 · 서울</h4>
+                <p class="weather-local" id="weatherLocalTime" aria-label="현지 날짜와 시간"></p>
+              </div>
+              <div class="city-picker">
+                <button type="button" id="cityToggle" class="city-toggle"
+                        aria-label="지역 변경" title="지역 변경"
+                        aria-haspopup="listbox" aria-expanded="false">
+                  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"
+                       stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M13 6.7C13 9.6 8 14 8 14S3 9.6 3 6.7a5 5 0 0 1 10 0Z"/>
+                    <circle cx="8" cy="6.7" r="1.7"/>
+                  </svg>
+                </button>
+                <ul id="cityMenu" class="city-menu" role="listbox" hidden></ul>
+              </div>
+            </div>
+            <div id="weatherDetail"></div>
+          </div>
+
+          <hr class="panel__rule">
+
+          <p class="panel__label">미니 게임🎲</p>
+          <div class="play-row">
+            <button type="button" id="upDownBtn"
+                    class="game-tile game-tile--number"
+                    aria-haspopup="dialog" aria-controls="upDownModal">
+              <span class="game-tile__icon game-tile__icon--number"
+                    aria-hidden="true"></span>
+              <span class="game-tile__label">숫자맞추기</span>
+            </button>
+            <button type="button" id="gradeBtn"
+                    class="game-tile game-tile--grade"
+                    aria-haspopup="dialog" aria-controls="gradeModal">
+              <span class="game-tile__icon game-tile__icon--grade"
+                    aria-hidden="true"></span>
+              <span class="game-tile__label">성적계산기</span>
+            </button>
+            <button type="button" id="bagModalBtn"
+                    class="game-tile game-tile--bag"
+                    aria-haspopup="dialog" aria-controls="bagModal">
+              <span class="game-tile__icon game-tile__icon--bag"
+                    aria-hidden="true"></span>
+              <span class="game-tile__label">가방 열기</span>
+            </button>
+          </div>
+
+          <dialog class="updown-modal" id="upDownModal"
+                  aria-labelledby="upDownTitle" aria-describedby="upDownGuide">
+            <div class="updown-modal__head">
+              <div>
+                <p class="updown-modal__eyebrow">NUMBER GAME</p>
+                <h3 id="upDownTitle">숫자 맞히기 🎯</h3>
+              </div>
+              <button type="button" class="updown-modal__close" id="upDownClose"
+                      aria-label="게임 닫기">×</button>
+            </div>
+
+            <p class="updown-modal__guide" id="upDownGuide">
+              먼저 돌림판을 돌려 이번 게임의 숫자 범위를 정해보세요.
+            </p>
+
+            <section class="updown-wheel-stage" id="upDownWheelStage"
+                     aria-labelledby="upDownWheelTitle">
+              <h4 id="upDownWheelTitle">이번 게임의 최대 숫자는?</h4>
+              <div class="updown-wheel-wrap">
+                <span class="updown-wheel-pointer" aria-hidden="true"></span>
+                <div class="updown-wheel" id="upDownWheel" aria-hidden="true">
+                  <span style="--angle:0deg;--reverse:0deg">30</span>
+                  <span style="--angle:45deg;--reverse:-45deg">40</span>
+                  <span style="--angle:90deg;--reverse:-90deg">50</span>
+                  <span style="--angle:135deg;--reverse:-135deg">60</span>
+                  <span style="--angle:180deg;--reverse:-180deg">70</span>
+                  <span style="--angle:225deg;--reverse:-225deg">80</span>
+                  <span style="--angle:270deg;--reverse:-270deg">90</span>
+                  <span style="--angle:315deg;--reverse:-315deg">100</span>
+                </div>
+                <strong class="updown-wheel-result" id="upDownWheelResult">?</strong>
+              </div>
+              <button type="button" class="btn btn--primary updown-wheel-spin"
+                      id="upDownSpin">돌림판 돌리기</button>
+            </section>
+
+            <div class="updown-game" id="upDownGame" hidden>
+              <div class="updown-stats" aria-label="현재 게임 상태">
+                <p>
+                  <span>남은 범위</span>
+                  <strong id="upDownRange">1 ~ 50</strong>
+                </p>
+                <p>
+                  <span>시도 횟수</span>
+                  <strong><b id="upDownAttempts">0</b>회</strong>
+                </p>
+              </div>
+
+              <form class="updown-form" id="upDownForm">
+                <label for="upDownInput">예상 숫자</label>
+                <div class="updown-form__row">
+                  <input type="number" id="upDownInput" min="1" max="50"
+                         inputmode="numeric" autocomplete="off" required
+                         aria-describedby="upDownMessage">
+                  <button type="submit" class="btn btn--primary" id="upDownSubmit">
+                    확인
+                  </button>
+                </div>
+              </form>
+
+              <p class="updown-message" id="upDownMessage" role="status"
+                 aria-live="polite">숫자를 입력하고 확인을 눌러주세요.</p>
+
+              <div class="updown-guesses">
+                <p class="updown-guesses__title">입력 기록</p>
+                <ol class="updown-guesses__list" id="upDownGuesses">
+                  <li class="updown-guesses__empty">아직 입력한 숫자가 없어요.</li>
+                </ol>
+              </div>
+            </div>
+
+            <section class="updown-ranking" aria-labelledby="upDownRankingTitle">
+              <div class="updown-ranking__head">
+                <h4 id="upDownRankingTitle">TOP 5 RANKING 🏆</h4>
+                <button type="button" class="updown-ranking__clear"
+                        id="upDownClear" hidden>기록 삭제</button>
+              </div>
+              <p class="updown-ranking__empty" id="upDownEmpty">
+                아직 랭킹이 없어요. 첫 기록을 만들어 보세요!
+              </p>
+              <ol class="updown-ranking__list" id="upDownRecords"></ol>
+            </section>
+
+            <div class="updown-modal__actions">
+              <button type="button" class="btn btn--primary"
+                      id="upDownRestart" hidden>다시 하기</button>
+              <button type="button" class="btn btn--ghost"
+                      id="upDownQuit">게임 나가기</button>
+            </div>
+          </dialog>
+
+          <dialog class="grade-modal" id="gradeModal"
+                  aria-labelledby="gradeTitle" aria-describedby="gradeGuide">
+            <div class="grade-modal__head">
+              <div>
+                <p class="grade-modal__eyebrow">GRADE CALCULATOR</p>
+                <h3 id="gradeTitle">성적 계산기 📝</h3>
+              </div>
+              <button type="button" class="grade-modal__close" id="gradeClose"
+                      aria-label="성적 계산기 닫기">×</button>
+            </div>
+
+            <p class="grade-modal__guide" id="gradeGuide">
+              과목별 점수를 입력하면 총점, 평균, 등급을 계산해 드려요.
+            </p>
+
+            <form class="grade-form" id="gradeForm" novalidate>
+              <div class="grade-fields">
+                <p class="grade-field">
+                  <label for="htmlScore">
+                    <span>HTML</span>
+                    <small>웹 구조</small>
+                  </label>
+                  <span class="grade-field__input">
+                    <input type="number" id="htmlScore" name="html"
+                           min="0" max="100" step="10" inputmode="numeric"
+                           autocomplete="off" required>
+                    <b>점</b>
+                  </span>
+                </p>
+
+                <p class="grade-field">
+                  <label for="cssScore">
+                    <span>CSS</span>
+                    <small>스타일링</small>
+                  </label>
+                  <span class="grade-field__input">
+                    <input type="number" id="cssScore" name="css"
+                           min="0" max="100" step="10" inputmode="numeric"
+                           autocomplete="off" required>
+                    <b>점</b>
+                  </span>
+                </p>
+
+                <p class="grade-field">
+                  <label for="javascriptScore">
+                    <span>JavaScript</span>
+                    <small>동작 구현</small>
+                  </label>
+                  <span class="grade-field__input">
+                    <input type="number" id="javascriptScore" name="javascript"
+                           min="0" max="100" step="10" inputmode="numeric"
+                           autocomplete="off" required>
+                    <b>점</b>
+                  </span>
+                </p>
+              </div>
+
+              <p class="grade-message" id="gradeMessage" role="alert" hidden></p>
+
+              <div class="grade-form__actions">
+                <button type="submit" class="btn btn--primary">계산하기</button>
+                <button type="reset" class="btn btn--ghost">다시 입력</button>
+              </div>
+            </form>
+
+            <section class="grade-result" id="gradeResult"
+                     aria-labelledby="gradeResultTitle" aria-live="polite" hidden>
+              <div class="grade-result__summary">
+                <div>
+                  <p class="grade-result__label">평균 점수</p>
+                  <p class="grade-result__average">
+                    <strong id="gradeAverage">0.0</strong><span>점</span>
+                  </p>
+                </div>
+                <p class="grade-result__badge" id="gradeLevel"
+                   aria-label="등급">-</p>
+              </div>
+
+              <h4 class="grade-result__status" id="gradeResultTitle">
+                계산 결과
+              </h4>
+              <p class="grade-result__detail">
+                총점 <strong id="gradeTotal">0</strong>점 ·
+                <strong id="gradePass">결과 대기 중</strong>
+              </p>
+            </section>
+          </dialog>
+
+          <dialog class="bag-modal" id="bagModal"
+                  aria-labelledby="bagModalTitle" aria-describedby="bagModalGuide">
+            <div class="bag-modal__head">
+              <div>
+                <p class="bag-modal__eyebrow">WHAT'S IN MY BAG</p>
+                <h3 id="bagModalTitle">오늘의 가방 속 소지품</h3>
+              </div>
+              <button type="button" class="bag-modal__close" id="bagModalClose"
+                      aria-label="가방 모달 닫기">×</button>
+            </div>
+
+            <p class="bag-modal__guide" id="bagModalGuide">
+              오늘 챙겨 나온 가방 안에는 무엇이 들어 있을까요?
+            </p>
+
+            <div class="bag__closed" id="bagClosed">
+              <button type="button" class="bag-figure" id="bagOpenBtn"
+                      aria-label="가방 열어보기">
+                <span class="bag-figure__icon" aria-hidden="true"></span>
+              </button>
+              <p class="bag__hint">가방을 클릭하세요 👆</p>
+            </div>
+
+            <div class="bag__open" id="bagOpen" hidden>
+              <p class="chip" id="bagSummary">불러오는 중…</p>
+              <ul class="bag-grid" id="bagBox"></ul>
+
+              <p class="bag-modal__actions">
+                <button type="button" class="btn btn--ghost" id="bagResetBtn">
+                  다시 담기
+                </button>
+                <button type="button" class="btn btn--primary" id="bagModalDone">
+                  확인
+                </button>
+              </p>
+            </div>
+          </dialog>
+        </section>
+
+        <section class="panel">
+          <p class="chip">Notice</p>
+          <ul class="notice-list">
+            <li>
+              <span class="notice-list__date">2026.07.23</span>
+              <span class="notice-list__text">Inwoo.log를 새로 열었습니다 🌱</span>
+            </li>
+            <li>
+              <span class="notice-list__date">2026.07.20</span>
+              <span class="notice-list__text">SKALA 4기 3주차가 시작되었습니다.</span>
+            </li>
+            <li>
+              <span class="notice-list__date">2026.02.08</span>
+              <span class="notice-list__text">여행일지에 부산 해운대 편을 추가했습니다.</span>
+            </li>
+          </ul>
+        </section>
+      </aside>
+
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+      <div>
+        <p class="site-footer__brand">inwoo<span>.log</span></p>
+        <p class="site-footer__desc">
+          이 사이트는 SKALA 4기 Full-stack Engineering 수업 과제로 제작한
+          개인 포트폴리오입니다.
+        </p>
+      </div>
+      <ul class="site-footer__links">
+        <li><a href="mailto:roseprincess0331@gmail.com">이메일</a></li>
+        <li><a href="https://github.com" target="_blank" rel="noopener">GitHub</a></li>
+        <li><a href="signUp.html">회원가입</a></li>
+        <li><a href="guestbook.html">방명록</a></li>
+      </ul>
+    </div>
+    <p class="site-footer__copy">© 2026 장인우 · SKALA 4기</p>
+  </footer>
+
+  <script src="../script/auth.js"></script>
+  <script src="../script/nav.js"></script>
+  <script src="../script/guestbook.js"></script>
+  <script src="../script/gbModal.js"></script>
+  <script src="../script/slider.js"></script>
+  <script src="../script/upDown.js"></script>
+  <script src="../script/grade.js"></script>
+  <script src="../script/bag.js"></script>
+  <script src="../script/calendar.js"></script>
+  <script type="module" src="../script/realtimeInfo.js"></script>
+</body>
+</html>

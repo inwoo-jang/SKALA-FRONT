@@ -1,0 +1,713 @@
+<!-- html/myTrip.html — 나의 여행지 (지도 + 피드) -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="사진·영상과 배경음악으로 남기는 여행일지.">
+  <title>여행일지 — Inwoo.log</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Space+Mono:wght@400;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="../media/icon/favicon.svg">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="page-trip">
+
+  <a class="skip" href="#main">본문으로 건너뛰기</a>
+
+  <header class="topbar">
+    <a class="topbar__logo" href="index.html">inwoo<span>.log</span></a>
+
+    <button type="button" class="nav-toggle" id="navToggle" aria-label="메뉴 열기" aria-expanded="false" aria-controls="siteNav">
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav class="topbar__nav" id="siteNav" aria-label="주요 메뉴">
+      <ul class="nav-list">
+        <li><a href="myProfile.html">Profile</a></li>
+        <li><a href="myPortfolio.html">Portfolio</a></li>
+        <li><a href="myCalendar.html">Calendar</a></li>
+        <li><a href="myTrip.html" class="is-active" aria-current="page">Trip</a></li>
+        <li><a href="myReadings.html">Reading</a></li>
+        <li><a href="guestbook.html">Guestbook</a></li>
+      </ul>
+    </nav>
+
+    <div class="topbar__auth" id="authArea">
+      <a href="login.html" class="btn btn--ghost">로그인</a>
+      <a href="signUp.html" class="btn btn--primary">회원가입</a>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <nav class="crumb" aria-label="현재 위치">
+      <a href="index.html">홈</a> <span aria-hidden="true">/</span> <span>여행일지</span>
+    </nav>
+
+    <header class="page-head page-head--trip">
+      <div class="page-head__copy">
+        <p class="eyebrow">필름 한 롤에 남은 장면들</p>
+        <h1 class="page-title">천천히 꺼내 보는 <em>여행의 순간</em></h1>
+        <p class="page-desc">
+          오래 기억하고 싶은 장면과 그날의 짧은 메모를 모았습니다.
+        </p>
+      </div>
+
+      <!-- 배경음악 — 재생바 대신, 남은 필름이 카메라 쪽으로 감겨 들어간다 -->
+      <div class="film-player" id="filmPlayer" hidden>
+        <div class="film-player__track" id="filmTrack">
+          <!-- 물결치는 필름 띠 -->
+          <svg class="film-player__film" viewBox="0 0 300 40" preserveAspectRatio="none" aria-hidden="true">
+            <path class="film-player__film-band"
+                  d="M0 24 C 30 12, 62 30, 96 20 C 126 12, 152 28, 186 20 C 216 13, 248 27, 300 18"/>
+            <path class="film-player__film-frames"
+                  d="M0 24 C 30 12, 62 30, 96 20 C 126 12, 152 28, 186 20 C 216 13, 248 27, 300 18"/>
+            <g class="film-player__film-holes">
+              <path d="M0 24 C 30 12, 62 30, 96 20 C 126 12, 152 28, 186 20 C 216 13, 248 27, 300 18"
+                    transform="translate(0,-7.5)"/>
+              <path d="M0 24 C 30 12, 62 30, 96 20 C 126 12, 152 28, 186 20 C 216 13, 248 27, 300 18"
+                    transform="translate(0,7.5)"/>
+            </g>
+          </svg>
+          <span class="film-player__coil" id="filmCoil" aria-hidden="true"></span>
+        </div>
+
+        <button type="button" class="film-player__camera" id="filmToggle"
+                aria-label="배경음악 재생" aria-pressed="false" title="배경음악">
+          <img class="film-player__camera-img" src="../media/icon/camera.png"
+               alt="" width="371" height="301">
+        </button>
+
+        <div class="film-player__meta">
+          <button type="button" class="film-player__skip" id="bgmPrev" aria-label="이전 곡">‹</button>
+          <p class="film-player__label" id="filmLabel">BGM · Stunts Cheer</p>
+          <button type="button" class="film-player__skip" id="bgmNext" aria-label="다음 곡">›</button>
+        </div>
+
+        <audio id="tripBgm" preload="metadata"></audio>
+      </div>
+    </header>
+
+    <main id="main">
+
+      <div class="trip-layout">
+
+        <!-- ===== 왼쪽 : 사진 피드 ===== -->
+        <div class="trip-main">
+
+      <section class="feed-section" id="feedAbroad">
+        <section class="feed-group" id="tripBangkok">
+          <header class="feed-group__head">
+            <h2 class="feed-group__title">태국<span aria-hidden="true">·</span>방콕</h2>
+            <p class="feed-group__note">사진 5</p>
+          </header>
+          <div class="feed">
+            <article class="feed__item">
+              <button type="button" class="feed__open"
+                      aria-label="크게 보기 — 밝을 때 왓 아룬을 바라보며 즐긴 태국 음식과 음료">
+                <img src="../media/trip/thai2.jpg" alt="밝을 때 왓 아룬을 바라보며 즐긴 태국 음식과 음료" loading="lazy">
+              </button>
+              <div class="feed__cap">
+                <p class="feed__place">왓 아룬</p>
+                <p class="feed__sub">저녁 먹으면서 해 질 때까지 계속 봄</p>
+                <p class="feed__date">2024.06.21</p>
+              </div>
+            </article>
+
+            <article class="feed__item">
+              <button type="button" class="feed__open"
+                      aria-label="크게 보기 — 어두워진 뒤 조명이 켜진 왓 아룬의 야경">
+                <img src="../media/trip/thai1.jpg" alt="어두워진 뒤 조명이 켜진 왓 아룬의 야경" loading="lazy">
+              </button>
+              <div class="feed__cap">
+                <p class="feed__place">왓 아룬</p>
+                <p class="feed__sub">불 켜지니까 더 예뻤음...!</p>
+                <p class="feed__date">2024.06.21</p>
+              </div>
+            </article>
+
+            <article class="feed__item">
+              <button type="button" class="feed__open"
+                      aria-label="크게 보기 — 파란색과 초록색 조명으로 빛나는 방콕의 루프톱 바">
+                <img src="../media/trip/thai3.jpg" alt="파란색과 초록색 조명으로 빛나는 방콕의 루프톱 바" loading="lazy">
+              </button>
+              <div class="feed__cap">
+                <p class="feed__place">루프탑 바, Tichuca</p>
+                <p class="feed__sub">조명부터 분위기까지 완전 신남! 방콕의 밤 제대로 즐김</p>
+                <p class="feed__date">2024.06.22</p>
+              </div>
+            </article>
+
+            <article class="feed__item">
+              <button type="button" class="feed__open"
+                      aria-label="크게 보기 — 방콕 실롬 타이 쿠킹 클래스에 준비된 태국 식재료와 향신료">
+                <img src="../media/trip/thai4.jpeg" alt="방콕 실롬 타이 쿠킹 클래스에 준비된 태국 식재료와 향신료" loading="lazy">
+              </button>
+              <div class="feed__cap">
+                <p class="feed__place">실롬 타이 쿠킹 스쿨</p>
+                <p class="feed__sub">재료 하나씩 배우고 직접 요리까지 해봄. 내가 만들어서 더 맛있었음!</p>
+                <p class="feed__date">2024.06.23</p>
+              </div>
+            </article>
+
+            <article class="feed__item">
+              <button type="button" class="feed__open"
+                      aria-label="크게 보기 — 파타야에서 코와 트렁크를 내민 코끼리 옆에서 찍은 기념사진">
+                <img src="../media/trip/thai5.JPG" alt="파타야에서 코와 트렁크를 내민 코끼리 옆에서 찍은 기념사진" loading="lazy">
+              </button>
+              <div class="feed__cap">
+                <p class="feed__place">파타야 코끼리 트래킹</p>
+                <p class="feed__sub">코끼리가 자꾸 장난쳐서 무서웠음ㅋㅋ</p>
+                <p class="feed__date">2024.06.26</p>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="feed-group" id="tripHokkaido">
+          <header class="feed-group__head">
+            <h2 class="feed-group__title">일본<span aria-hidden="true">·</span>홋카이도</h2>
+            <p class="feed-group__note">사진 4 · 영상 2</p>
+          </header>
+          <div class="feed">
+            <article class="feed__item">
+              <button type="button" class="feed__open"
+                      aria-label="크게 보기 — 운하와 오래된 창고 건물이 어우러진 오타루 운하 풍경">
+                <img src="../media/trip/japan1.jpeg" alt="운하와 오래된 창고 건물이 어우러진 오타루 운하 풍경" loading="lazy">
+              </button>
+              <div class="feed__cap">
+                <p class="feed__place">오타루 운하</p>
+                <p class="feed__sub">비가 살짝 왔지만 빠르게 찰칵!</p>
+                <p class="feed__date">2025.09.26</p>
+              </div>
+            </article>
+
+            <article class="feed__item">
+              <button type="button" class="feed__open"
+                      aria-label="크게 보기 — 목조 건물 안에 다양한 오르골과 소품이 진열된 오타루 오르골당">
+                <img src="../media/trip/japan4.jpeg" alt="목조 건물 안에 다양한 오르골과 소품이 진열된 오타루 오르골당" loading="lazy">
+              </button>
+              <div class="feed__cap">
+                <p class="feed__place">오타루 오르골당</p>
+                <p class="feed__sub">오르골 노래를 일일이 들어보면서 한참 구경!</p>
+                <p class="feed__date">2025.09.26</p>
+              </div>
+            </article>
+
+            <article class="feed__item">
+              <video controls preload="metadata"
+                     aria-label="삿포로 스스키노 교차로의 니카상 네온사인 영상">
+                <source src="../media/trip/japan_mov2.mp4" type="video/mp4">
+                브라우저가 video 태그를 지원하지 않습니다.
+                <a href="../media/trip/japan_mov2.mp4">영상 내려받기</a>
+              </video>
+              <div class="feed__cap">
+                <p class="feed__place">삿포로 스스키노</p>
+                <p class="feed__sub">삿포로 시내 걷다가 드디어 니카상 영접!</p>
+                <p class="feed__date">2025.09.26</p>
+              </div>
+            </article>
+
+            <article class="feed__item">
+              <button type="button" class="feed__open"
+                      aria-label="크게 보기 — 청록빛 물과 마른 나무가 어우러진 비에이 청의 호수">
+                <img src="../media/trip/japan2.JPG" alt="청록빛 물과 마른 나무가 어우러진 비에이 청의 호수" loading="lazy">
+              </button>
+              <div class="feed__cap">
+                <p class="feed__place">비에이 청의 호수</p>
+                <p class="feed__sub">사진보다 실제 물빛이 더 신기했음. 진짜 청록색!</p>
+                <p class="feed__date">2025.09.27</p>
+              </div>
+            </article>
+
+            <article class="feed__item">
+              <button type="button" class="feed__open"
+                      aria-label="크게 보기 — 비에이 시키사이노오카의 꽃밭과 카트 앞에서 찍은 여행 사진">
+                <img src="../media/trip/japan3.jpg" alt="비에이 시키사이노오카의 꽃밭과 카트 앞에서 찍은 여행 사진" loading="lazy">
+              </button>
+              <div class="feed__cap">
+                <p class="feed__place">비에이 시키사이노오카</p>
+                <p class="feed__sub">구름과 자연뷰 완벽! 꽃밭 사이를 신나게 돌아다님</p>
+                <p class="feed__date">2025.09.27</p>
+              </div>
+            </article>
+
+            <article class="feed__item">
+              <video controls preload="metadata"
+                     aria-label="시키사이노오카에서 카트를 타고 이동하는 영상">
+                <source src="../media/trip/japan_mov1.mp4" type="video/mp4">
+                브라우저가 video 태그를 지원하지 않습니다.
+                <a href="../media/trip/japan_mov1.mp4">영상 내려받기</a>
+              </video>
+              <div class="feed__cap">
+                <p class="feed__place">시키사이노오카 카트</p>
+                <p class="feed__sub">카트 타고 돌아다니는데 너무 신났음</p>
+                <p class="feed__date">2025.09.27</p>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="feed-group" id="tripShanghai">
+          <header class="feed-group__head">
+            <h2 class="feed-group__title">중국<span aria-hidden="true">·</span>상하이</h2>
+            <p class="feed-group__note">사진 4 · 영상 1</p>
+          </header>
+          <div class="feed">
+            <article class="feed__item">
+              <button type="button" class="feed__open"
+                      aria-label="크게 보기 — 와이탄 야경">
+                <img src="../media/trip/shanghai1.jpg" alt="와이탄 야경" loading="lazy">
+              </button>
+              <div class="feed__cap">
+                <p class="feed__place">와이탄 야경</p>
+                <p class="feed__sub">언제봐도 예쁘댬!</p>
+                <p class="feed__date">24.04.01</p>
+              </div>
+            </article>
+
+            <article class="feed__item">
+              <button type="button" class="feed__open"
+                      aria-label="크게 보기 — 예원 거리">
+                <img src="../media/trip/shanghai2.jpg" alt="예원 거리" loading="lazy">
+              </button>
+              <div class="feed__cap">
+                <p class="feed__place">예원 거리</p>
+                <p class="feed__sub">전통에 적당한 조명이 섞여서 매력적</p>
+                <p class="feed__date">24.04.01</p>
+              </div>
+            </article>
+
+            <article class="feed__item">
+              <button type="button" class="feed__open"
+                      aria-label="크게 보기 — 와이탄에서 바라본 황푸강 뷰">
+                <img src="../media/trip/shanghai3.jpeg"
+                     alt="황푸강 건너 동방명주와 푸둥의 야경을 바라보는 모습" loading="lazy">
+              </button>
+              <div class="feed__cap">
+                <p class="feed__place">와이탄에서 바라본 황푸강 뷰</p>
+                <p class="feed__sub">강물 위로 반짝이던 상하이의 스카이라인</p>
+                <p class="feed__date">24.04.01</p>
+              </div>
+            </article>
+
+            <article class="feed__item">
+              <button type="button" class="feed__open"
+                      aria-label="크게 보기 — 루프탑바에서 바라본 동방명주">
+                <img src="../media/trip/shanghai4.jpeg"
+                     alt="구름과 안개에 둘러싸인 동방명주의 야경" loading="lazy">
+              </button>
+              <div class="feed__cap">
+                <p class="feed__place">루프탑바에서 바라본 동방명주</p>
+                <p class="feed__sub">날씨가 흐려 아쉬웠지만 동방명주는 여전히 예뻤던...</p>
+                <p class="feed__date">24.04.03</p>
+              </div>
+            </article>
+
+            <article class="feed__item">
+              <video controls preload="metadata"
+                     aria-label="상하이 디즈니랜드 라이트쇼 영상">
+                <source src="../media/trip/shanghai_mov1.mp4" type="video/mp4">
+                브라우저가 video 태그를 지원하지 않습니다.
+                <a href="../media/trip/shanghai_mov1.mp4">영상 내려받기</a>
+              </video>
+              <div class="feed__cap">
+                <p class="feed__place">상하이 디즈니랜드 라이트쇼</p>
+                <p class="feed__sub">디즈니랜드표가 비싼 이유...! 사람이 여의도 불꽃축제급</p>
+                <p class="feed__date">24.04.02</p>
+              </div>
+            </article>
+          </div>
+        </section>
+      </section>
+
+      <section class="feed-section" id="feedDomestic" hidden>
+        <section class="feed-group" id="tripBusan">
+          <header class="feed-group__head">
+            <h2 class="feed-group__title">경남<span aria-hidden="true">·</span>부산</h2>
+            <p class="feed-group__note">사진 1 · 영상 1</p>
+          </header>
+          <div class="feed">
+            <article class="feed__item">
+              <button type="button" class="feed__open"
+                      aria-label="크게 보기 — 밤에 불이 켜진 고층 건물과 해운대 해변 산책로">
+                <img src="../media/trip/busan.jpeg" alt="밤에 불이 켜진 고층 건물과 해운대 해변 산책로" loading="lazy">
+              </button>
+              <div class="feed__cap">
+                <p class="feed__place">해운대</p>
+                <p class="feed__sub">밤바다 보면서 해운대 산책. 야경까지 반짝반짝!</p>
+                <p class="feed__date">2026.02.07</p>
+              </div>
+            </article>
+
+            <article class="feed__item">
+              <video controls preload="metadata"
+                     aria-label="부산 해운대에서 촬영한 영상">
+                <source src="../media/trip/busan_mov1.mp4" type="video/mp4">
+                브라우저가 video 태그를 지원하지 않습니다.
+                <a href="../media/trip/busan_mov1.mp4">영상 내려받기</a>
+              </video>
+              <div class="feed__cap">
+                <p class="feed__place">해운대</p>
+                <p class="feed__sub">해운대에서 영상으로 남긴 순간!</p>
+                <p class="feed__date">2026.02.08</p>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="feed-group" id="tripPohang">
+          <header class="feed-group__head">
+            <h2 class="feed-group__title">경북<span aria-hidden="true">·</span>포항</h2>
+            <p class="feed-group__note">사진 1 · 영상 2</p>
+          </header>
+          <div class="feed">
+            <article class="feed__item">
+              <button type="button" class="feed__open"
+                      aria-label="크게 보기 — 포항 바다를 담는 순간">
+                <img src="../media/trip/pohang.JPG"
+                     alt="포항 바닷가에서 푸른 바다를 사진으로 담는 모습" loading="lazy">
+              </button>
+              <div class="feed__cap">
+                <p class="feed__place">포항 바다를 담는 순간</p>
+                <p class="feed__sub">푸른 바다 앞에서 서로의 오늘을 사진으로 남겼다</p>
+                <p class="feed__date">26.06.06</p>
+              </div>
+            </article>
+
+            <article class="feed__item">
+              <video controls preload="metadata"
+                     aria-label="포항 해안 산책길의 풍경 영상">
+                <source src="../media/trip/pohang_mov1.mp4" type="video/mp4">
+                브라우저가 video 태그를 지원하지 않습니다.
+                <a href="../media/trip/pohang_mov1.mp4">영상 내려받기</a>
+              </video>
+              <div class="feed__cap">
+                <p class="feed__place">바다 옆 산책길</p>
+                <p class="feed__sub">창밖으로 스쳐 가는 포항의 바다와 여유로운 풍경</p>
+                <p class="feed__date">26.06.06</p>
+              </div>
+            </article>
+
+            <article class="feed__item">
+              <video controls preload="metadata"
+                     aria-label="포항 해변과 바다의 풍경 영상">
+                <source src="../media/trip/pohang_mov2.mp4" type="video/mp4">
+                브라우저가 video 태그를 지원하지 않습니다.
+                <a href="../media/trip/pohang_mov2.mp4">영상 내려받기</a>
+              </video>
+              <div class="feed__cap">
+                <p class="feed__place">파도 너머 포항</p>
+                <p class="feed__sub">모래사장에 머물며 바라본 잔잔한 파도와 포항의 풍경</p>
+                <p class="feed__date">26.06.06</p>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="feed-group" id="tripJeonju">
+          <header class="feed-group__head">
+            <h2 class="feed-group__title">전북<span aria-hidden="true">·</span>전주</h2>
+            <p class="feed-group__note">사진 5 · 영상 1</p>
+          </header>
+          <div class="feed">
+            <article class="feed__item">
+              <button type="button" class="feed__open"
+                      aria-label="크게 보기 — 전주 한옥마을 짱구 팝업스토어 앞 풍경">
+                <img src="../media/trip/jeonju4.jpeg" alt="지붕 위 짱구 풍선이 놓인 전주 한옥마을 짱구 팝업스토어" loading="lazy">
+              </button>
+              <div class="feed__cap">
+                <p class="feed__place">한옥마을 짱구 팝업스토어</p>
+                <p class="feed__sub">한옥 지붕 위에 짱구가! 그냥 지나칠 수 없었음</p>
+                <p class="feed__date">2024.08.10</p>
+              </div>
+            </article>
+
+            <article class="feed__item">
+              <button type="button" class="feed__open"
+                      aria-label="크게 보기 — 특별전시관 기와 대문 앞에 핀 보라색 버베나 꽃">
+                <img src="../media/trip/jeonju1.jpeg" alt="특별전시관 기와 대문 앞에 핀 보라색 버베나 꽃" loading="lazy">
+              </button>
+              <div class="feed__cap">
+                <p class="feed__place">한옥마을 특별전시관</p>
+                <p class="feed__sub">기와 담장 앞 보라색 꽃이 예뻐서 찰칵</p>
+                <p class="feed__date">2024.08.10</p>
+              </div>
+            </article>
+
+            <article class="feed__item">
+              <button type="button" class="feed__open"
+                      aria-label="크게 보기 — 놋그릇에 담긴 전주 육회비빔밥 한 상">
+                <img src="../media/trip/jeonju5.jpeg" alt="놋그릇에 담긴 육회비빔밥과 반찬이 차려진 전주의 한 상" loading="lazy">
+              </button>
+              <div class="feed__cap">
+                <p class="feed__place">전주비빔밥</p>
+                <p class="feed__sub">전주까지 왔으면 육회비빔밥은 국룰</p>
+                <p class="feed__date">2024.08.10</p>
+              </div>
+            </article>
+
+            <article class="feed__item">
+              <button type="button" class="feed__open"
+                      aria-label="크게 보기 — 조명이 켜진 풍남문의 밤 풍경">
+                <img src="../media/trip/jeonju3.jpeg" alt="밤 조명을 받아 빛나는 전주 풍남문" loading="lazy">
+              </button>
+              <div class="feed__cap">
+                <p class="feed__place">풍남문</p>
+                <p class="feed__sub">밤에 보니 더 웅장했던 성문</p>
+                <p class="feed__date">2024.08.10</p>
+              </div>
+            </article>
+
+            <article class="feed__item">
+              <button type="button" class="feed__open"
+                      aria-label="크게 보기 — 밤 골목 수레 벤치에 앉아 있는 고양이 두 마리">
+                <img src="../media/trip/jeonju2.jpeg" alt="밤 골목 수레 벤치 위아래에 앉아 있는 노란 고양이 두 마리" loading="lazy">
+              </button>
+              <div class="feed__cap">
+                <p class="feed__place">한옥마을 골목</p>
+                <p class="feed__sub">밤 산책하다 만난 골목 터줏대감들 🐱</p>
+                <p class="feed__date">2024.08.10</p>
+              </div>
+            </article>
+
+            <article class="feed__item">
+              <video controls preload="metadata"
+                     aria-label="전주 한옥마을 거리에서 펼쳐진 농악 공연 영상">
+                <source src="../media/trip/jeonju_mov1.mp4" type="video/mp4">
+                브라우저가 video 태그를 지원하지 않습니다.
+              </video>
+              <div class="feed__cap">
+                <p class="feed__place">한옥마을 농악 공연</p>
+                <p class="feed__sub">깃발 들고 지나가는 풍물패를 우연히 만남!</p>
+                <p class="feed__date">2024.08.11</p>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="feed-group" id="tripSokcho">
+          <header class="feed-group__head">
+            <h2 class="feed-group__title">강원<span aria-hidden="true">·</span>속초</h2>
+            <p class="feed-group__note">사진 5</p>
+          </header>
+          <div class="feed">
+            <article class="feed__item">
+              <button type="button" class="feed__open"
+                      aria-label="크게 보기 — 속초의 첫 끼, 오징어순대">
+                <img src="../media/trip/sokcho1.jpeg"
+                     alt="노릇하게 구운 속초 오징어순대와 곁들임 반찬" loading="lazy">
+              </button>
+              <div class="feed__cap">
+                <p class="feed__place">속초의 첫 끼, 오징어순대</p>
+                <p class="feed__sub">속이 꽉 찬 오징어순대로 든든하게 시작한 속초 여행</p>
+                <p class="feed__date">26.01.01</p>
+              </div>
+            </article>
+
+            <article class="feed__item">
+              <button type="button" class="feed__open"
+                      aria-label="크게 보기 — 겨울 동해의 푸른 수평선">
+                <img src="../media/trip/sokcho2.JPG"
+                     alt="맑고 푸른 하늘 아래 펼쳐진 속초 겨울 바다" loading="lazy">
+              </button>
+              <div class="feed__cap">
+                <p class="feed__place">겨울 동해의 푸른 수평선</p>
+                <p class="feed__sub">차가운 바람도 잊게 만든 선명한 속초 바다</p>
+                <p class="feed__date">26.01.01</p>
+              </div>
+            </article>
+
+            <article class="feed__item">
+              <button type="button" class="feed__open"
+                      aria-label="크게 보기 — 뜨끈한 순두부 한 상">
+                <img src="../media/trip/sokcho3.jpeg"
+                     alt="순두부와 얼큰한 찌개가 차려진 속초의 따뜻한 한 끼" loading="lazy">
+              </button>
+              <div class="feed__cap">
+                <p class="feed__place">뜨끈한 순두부 한 상</p>
+                <p class="feed__sub">겨울 바다를 본 뒤 몸을 녹여준 따뜻한 한 끼</p>
+                <p class="feed__date">26.01.01</p>
+              </div>
+            </article>
+
+            <article class="feed__item">
+              <button type="button" class="feed__open"
+                      aria-label="크게 보기 — 해 뜨기 전 속초 바다">
+                <img src="../media/trip/sokcho4.jpeg"
+                     alt="해가 뜨기 전 주황빛으로 물든 속초 해변의 하늘" loading="lazy">
+              </button>
+              <div class="feed__cap">
+                <p class="feed__place">해 뜨기 전 속초 바다</p>
+                <p class="feed__sub">수평선이 천천히 주황빛으로 물들던 새해 아침</p>
+                <p class="feed__date">26.01.01</p>
+              </div>
+            </article>
+
+            <article class="feed__item">
+              <button type="button" class="feed__open"
+                      aria-label="크게 보기 — 2026년 첫 해돋이">
+                <img src="../media/trip/sokcho5.jpeg"
+                     alt="구름 위로 떠오르는 2026년 속초의 첫 해" loading="lazy">
+              </button>
+              <div class="feed__cap">
+                <p class="feed__place">2026년 첫 해돋이</p>
+                <p class="feed__sub">바다 위로 모습을 드러낸 새해 첫 태양</p>
+                <p class="feed__date">26.01.01</p>
+              </div>
+            </article>
+          </div>
+        </section>
+      </section>
+
+          <!-- 한 장씩 크게 보기 -->
+          <section class="viewer" id="viewer" hidden aria-label="사진 크게 보기">
+            <div class="viewer__head">
+              <p class="viewer__count" id="viewerCount">1 / 6</p>
+              <button type="button" class="btn btn--mini" id="viewerClose">목록으로</button>
+            </div>
+
+            <figure class="viewer__figure">
+              <img id="viewerImg" src="../media/trip/thai2.jpg"
+                     alt="밝을 때 왓 아룬을 바라보며 즐긴 태국 음식과 음료" loading="lazy">
+              <figcaption class="viewer__cap">
+                <p class="viewer__region" id="viewerRegion"></p>
+                <p class="viewer__place" id="viewerPlace"></p>
+                <p class="viewer__sub" id="viewerSub"></p>
+                <p class="viewer__date" id="viewerDate"></p>
+              </figcaption>
+            </figure>
+
+            <div class="viewer__nav">
+              <button type="button" class="btn btn--ghost" id="viewerPrev">← 이전</button>
+              <button type="button" class="btn btn--ghost" id="viewerNext">다음 →</button>
+            </div>
+          </section>
+
+        </div>
+
+        <!-- ===== 오른쪽 : 지역 전환 + 지도 ===== -->
+        <aside class="trip-side" aria-label="지역 선택과 지도">
+
+          <div class="switch" role="tablist" aria-label="지역 선택">
+            <span class="switch__thumb" aria-hidden="true"></span>
+
+            <button type="button" class="switch__btn is-active"
+                    id="btnAbroad" data-region="abroad"
+                    role="tab" aria-selected="true" aria-controls="mapAbroad">
+              🌏 해외
+            </button>
+
+            <button type="button" class="switch__btn"
+                    id="btnDomestic" data-region="domestic"
+                    role="tab" aria-selected="false" aria-controls="mapDomestic">
+              🇰🇷 국내
+            </button>
+          </div>
+
+          <p class="trip-count" id="countAbroad">
+            나라 <b>3</b> · 사진 <b>8</b> · 영상 <b>2</b>
+          </p>
+
+          <p class="trip-count" id="countDomestic" hidden>
+            도시 <b>4</b> · 사진 <b>7</b> · 영상 <b>3</b>
+          </p>
+
+          <div class="map" id="mapAbroad">
+            <img class="map__img" src="../media/map-abroad.svg"
+                 alt="동아시아와 동남아시아 지도. 태국 방콕, 일본 홋카이도, 중국 상하이를 다녀왔습니다."
+                 width="600" height="571">
+
+            <a class="map__pin map__pin--edge-l" href="#tripBangkok" style="left:14.7%; top:72.5%">
+              <span class="map__pin-label">방콕</span>
+              <span class="map__pin-card">
+                <span class="map__pin-place">태국 · 방콕</span>
+                <span class="map__pin-count">📷 5</span>
+              </span>
+            </a>
+            <a class="map__pin map__pin--edge-r" href="#tripHokkaido" style="left:87.0%; top:13.5%">
+              <span class="map__pin-label">홋카이도</span>
+              <span class="map__pin-card">
+                <span class="map__pin-place">일본 · 홋카이도</span>
+                <span class="map__pin-count">📷 4 · 🎬 2</span>
+              </span>
+            </a>
+            <a class="map__pin" href="#tripShanghai" style="left:50.8%; top:37.5%">
+              <span class="map__pin-label">상하이</span>
+              <span class="map__pin-card">
+                <span class="map__pin-place">중국 · 상하이</span>
+                <span class="map__pin-count">준비 중 🚧</span>
+              </span>
+            </a>
+          </div>
+
+          <div class="map map--kr" id="mapDomestic" hidden>
+            <img class="map__img" src="../media/map-domestic.svg"
+                 alt="대한민국 지도. 부산, 포항, 속초, 전주를 다녀왔습니다."
+                 width="420" height="576">
+
+            <a class="map__pin" href="#tripSokcho" style="left:64.0%; top:16.0%">
+              <span class="map__pin-label">속초</span>
+              <span class="map__pin-card">
+                <span class="map__pin-place">속초</span>
+                <span class="map__pin-count">📷 5</span>
+              </span>
+            </a>
+            <a class="map__pin" href="#tripJeonju" style="left:38.3%; top:54.3%">
+              <span class="map__pin-label">전주</span>
+              <span class="map__pin-card">
+                <span class="map__pin-place">전주</span>
+                <span class="map__pin-count">준비 중 🚧</span>
+              </span>
+            </a>
+            <a class="map__pin" href="#tripBusan" style="left:72.9%; top:64.8%">
+              <span class="map__pin-label">부산</span>
+              <span class="map__pin-card">
+                <span class="map__pin-place">부산</span>
+                <span class="map__pin-count">📷 1 · 🎬 1</span>
+              </span>
+            </a>
+            <a class="map__pin map__pin--edge-r" href="#tripPohang" style="left:74.5%; top:48.5%">
+              <span class="map__pin-label">포항</span>
+              <span class="map__pin-card">
+                <span class="map__pin-place">포항</span>
+                <span class="map__pin-count">📷 1 · 🎬 2</span>
+              </span>
+            </a>
+          </div>
+
+        </aside>
+
+      </div>
+
+    </main>
+  </div>
+
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+      <div>
+        <p class="site-footer__brand">inwoo<span>.log</span></p>
+        <p class="site-footer__desc">
+          이 사이트는 SKALA 4기 Full-stack Engineering 수업 과제로 제작한
+          개인 포트폴리오입니다.
+        </p>
+      </div>
+      <ul class="site-footer__links">
+        <li><a href="mailto:roseprincess0331@gmail.com">이메일</a></li>
+        <li><a href="https://github.com" target="_blank" rel="noopener">GitHub</a></li>
+        <li><a href="signUp.html">회원가입</a></li>
+        <li><a href="guestbook.html">방명록</a></li>
+      </ul>
+    </div>
+    <p class="site-footer__copy">© 2026 장인우 · SKALA 4기</p>
+  </footer>
+
+  <script src="../script/auth.js"></script>
+  <script src="../script/nav.js"></script>
+  <script src="../script/trip.js"></script>
+  <script src="../script/filmPlayer.js"></script>
+</body>
+</html>
