@@ -12,6 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Space+Mono:wght@400;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
   <link rel="icon" type="image/svg+xml" href="../media/icon/favicon.svg">
   <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/flags.css">
 </head>
 <body>
 
@@ -68,7 +69,7 @@
           <dt>이메일</dt>
           <dd><a href="mailto:roseprincess0331@gmail.com">roseprincess0331@gmail.com</a></dd>
           <dt>GitHub</dt>
-          <dd><a href="https://github.com" target="_blank" rel="noopener">https://github.com/inwoo-jang</a></dd>
+          <dd><a href="https://github.com/inwoo-jang" target="_blank" rel="noopener">https://github.com/inwoo-jang</a></dd>
         </dl>
       </section>
 
@@ -118,7 +119,7 @@
           <li class="timeline__item">
             <span class="timeline__year">2014<small>~ 20</small></span>
             <div class="timeline__body">
-              <p class="timeline__role">중국 유학 🇨🇳</p>
+              <p class="timeline__role">중국 유학 <span class="flag flag--cn" role="img" aria-label="중국"></span></p>
               <p class="timeline__desc">상하이에서 법학을 공부하며 중국에서 5~6년 정도 지냈습니다.</p>
             </div>
           </li>
@@ -185,19 +186,19 @@
           <div>
             <h3>밥이 되는 음식 🍜</h3>
             <ul class="taste-list">
-              <li>🇰🇷 한식 — 삼겹살, 순대국밥, 된장찌개, 김치찌개</li>
-              <li>🇨🇳 중식 — 마라샹궈, 카오위, 짬뽕</li>
-              <li>🇯🇵 일식 — 초밥, 텐동</li>
-              <li>🇻🇳 베트남식 — 쌀국수</li>
+              <li><span class="flag flag--kr" role="img" aria-label="대한민국"></span> 한식 — 삼겹살, 순대국밥, 된장찌개, 김치찌개</li>
+              <li><span class="flag flag--cn" role="img" aria-label="중국"></span> 중식 — 마라샹궈, 카오위, 짬뽕</li>
+              <li><span class="flag flag--jp" role="img" aria-label="일본"></span> 일식 — 초밥, 텐동</li>
+              <li><span class="flag flag--vn" role="img" aria-label="베트남"></span> 베트남식 — 쌀국수</li>
             </ul>
           </div>
 
           <div>
             <h3>또 못 참는 음식 🍝</h3>
             <ul class="taste-list">
-              <li>🇮🇹 양식 — 파스타, 화덕피자</li>
-              <li>🇮🇳 인도식 — 커리와 허니버터난</li>
-              <li>🇹🇭 태국식 — 팟타이, 똠양꿍</li>
+              <li><span class="flag flag--it" role="img" aria-label="이탈리아"></span> 양식 — 파스타, 화덕피자</li>
+              <li><span class="flag flag--in" role="img" aria-label="인도"></span> 인도식 — 커리와 허니버터난</li>
+              <li><span class="flag flag--th" role="img" aria-label="태국"></span> 태국식 — 팟타이, 똠양꿍</li>
               <li>🥟 분식 — 떡볶이, 김밥</li>
             </ul>
           </div>
@@ -205,10 +206,10 @@
           <div>
             <h3>디저트는 따로 🍰</h3>
             <ul class="taste-list">
-              <li>🍰 케이크 — 딸기 생크림과 치즈케이크 사이에서 늘 고민합니다</li>
+              <li>🍰 케이크 — 케이크 종류는 안가립니다</li>
               <li>🧋 버블티 — 당 충전이 필요한 날의 국룰</li>
-              <li>🍦 아이스크림 — 여행지에서는 하루 하나</li>
-              <li>☕ 카페 탐방 — 디저트 맛집을 찾아다닙니다</li>
+              <li>🍦 아이스크림 — 요즘은 요아정이 최애</li>
+              <li>🍧 빙수 — 기본팥빙수와 과일빙수 사이에서 고민</li>
             </ul>
           </div>
         </div>
@@ -236,33 +237,94 @@
 
           <div>
             <h3>좋아하는 음악 🎧</h3>
-            <div class="music-slider">
-              <div class="music-slider__stage">
-                <ul class="music-slider__track" id="musicTrack">
-                  <li class="music-slider__item is-current">
+            <div class="coverflow" id="coverflow" tabindex="0" aria-label="좋아하는 앨범 커버플로우" data-finger-zone>
+              <ul class="coverflow__track">
+                <li class="coverflow__item">
+                  <a class="coverflow__link" href="https://www.youtube.com/results?search_query=허회경+김철수+씨+이야기" target="_blank" rel="noopener">
                     <img src="../media/albums/heo-hoykyung-kimchulsoo.jpg"
                          alt="허회경 — 김철수 씨 이야기 앨범 표지" loading="lazy">
-                    <p class="music-slider__song">김철수 씨 이야기</p>
-                    <p class="music-slider__artist">허회경</p>
-                  </li>
-                  <li class="music-slider__item">
+                    <div class="coverflow__meta">
+                      <p class="coverflow__song">김철수 씨 이야기</p>
+                      <p class="coverflow__artist">허회경</p>
+                    </div>
+                  </a>
+                </li>
+                <li class="coverflow__item">
+                  <a class="coverflow__link" href="https://www.youtube.com/results?search_query=알레프+첫사랑은+기준이+되는+걸+너는+알까" target="_blank" rel="noopener">
                     <img src="../media/albums/aleph-firstlove.jpg"
                          alt="알레프 — 첫사랑은 기준이 되는 걸 너는 알까 앨범 표지" loading="lazy">
-                    <p class="music-slider__song">첫사랑은 기준이 되는 걸 너는 알까</p>
-                    <p class="music-slider__artist">알레프 (ALEPH)</p>
-                  </li>
-                  <li class="music-slider__item">
+                    <div class="coverflow__meta">
+                      <p class="coverflow__song">첫사랑은 기준이 되는 걸 너는 알까</p>
+                      <p class="coverflow__artist">알레프 (ALEPH)</p>
+                    </div>
+                  </a>
+                </li>
+                <li class="coverflow__item">
+                  <a class="coverflow__link" href="https://www.youtube.com/results?search_query=봉훈+어떤+밤이+와도+널+안아줄게" target="_blank" rel="noopener">
                     <img src="../media/albums/bonghun-hugyou.jpg"
                          alt="봉훈 — 어떤 밤이 와도 널 안아줄게 앨범 표지" loading="lazy">
-                    <p class="music-slider__song">어떤 밤이 와도 널 안아줄게</p>
-                    <p class="music-slider__artist">봉훈</p>
-                  </li>
-                </ul>
+                    <div class="coverflow__meta">
+                      <p class="coverflow__song">어떤 밤이 와도 널 안아줄게</p>
+                      <p class="coverflow__artist">봉훈</p>
+                    </div>
+                  </a>
+                </li>
+                <li class="coverflow__item">
+                  <a class="coverflow__link" href="https://www.youtube.com/results?search_query=dori+밤" target="_blank" rel="noopener">
+                    <img src="../media/albums/dori-night.jpg"
+                         alt="dori — 밤 앨범 표지" loading="lazy">
+                    <div class="coverflow__meta">
+                      <p class="coverflow__song">밤</p>
+                      <p class="coverflow__artist">dori</p>
+                    </div>
+                  </a>
+                </li>
+                <li class="coverflow__item">
+                  <a class="coverflow__link" href="https://www.youtube.com/results?search_query=죠지+좋아해+바른연애+길잡이" target="_blank" rel="noopener">
+                    <img src="../media/albums/george-joahae.jpg"
+                         alt="죠지 — 좋아해.. 앨범 표지" loading="lazy">
+                    <div class="coverflow__meta">
+                      <p class="coverflow__song">좋아해..</p>
+                      <p class="coverflow__artist">죠지</p>
+                    </div>
+                  </a>
+                </li>
+                <li class="coverflow__item">
+                  <a class="coverflow__link" href="https://www.youtube.com/results?search_query=이창섭+거짓말의+반대말만+할게요" target="_blank" rel="noopener">
+                    <img src="../media/albums/leechangsub-geojinmal.jpg"
+                         alt="이창섭 — 거짓말의 반대말만 할게요 앨범 표지" loading="lazy">
+                    <div class="coverflow__meta">
+                      <p class="coverflow__song">거짓말의 반대말만 할게요</p>
+                      <p class="coverflow__artist">이창섭</p>
+                    </div>
+                  </a>
+                </li>
+                <li class="coverflow__item">
+                  <a class="coverflow__link" href="https://www.youtube.com/results?search_query=도규+사랑이+아니었다고+말하지+마요" target="_blank" rel="noopener">
+                    <img src="../media/albums/dogyu-sarang.jpg"
+                         alt="도규 — 사랑이 아니었다고 말하지 마요 앨범 표지" loading="lazy">
+                    <div class="coverflow__meta">
+                      <p class="coverflow__song">사랑이 아니었다고 말하지 마요</p>
+                      <p class="coverflow__artist">도규</p>
+                    </div>
+                  </a>
+                </li>
+                <li class="coverflow__item">
+                  <a class="coverflow__link" href="https://www.youtube.com/results?search_query=그리즐리+우리+다투게+돼도+이것만+기억해+줄래" target="_blank" rel="noopener">
+                    <img src="../media/albums/grizzly-woori.jpg"
+                         alt="그리즐리 — 우리 다투게 돼도 이것만 기억해 줄래 앨범 표지" loading="lazy">
+                    <div class="coverflow__meta">
+                      <p class="coverflow__song">우리 다투게 돼도 이것만 기억해 줄래</p>
+                      <p class="coverflow__artist">그리즐리</p>
+                    </div>
+                  </a>
+                </li>
+              </ul>
 
-                <button type="button" class="slider__nav slider__nav--prev" id="musicPrev" aria-label="이전 곡">‹</button>
-                <button type="button" class="slider__nav slider__nav--next" id="musicNext" aria-label="다음 곡">›</button>
-              </div>
-              <p class="music-slider__count" id="musicCount" aria-live="polite">1 / 3</p>
+              <button type="button" class="slider__nav slider__nav--prev" id="coverflowPrev" aria-label="이전 앨범">‹</button>
+              <button type="button" class="slider__nav slider__nav--next" id="coverflowNext" aria-label="다음 앨범">›</button>
+
+              <p class="coverflow__count" id="coverflowCount" aria-live="polite">1 / 8</p>
             </div>
           </div>
         </div>
@@ -282,9 +344,8 @@
       </div>
       <ul class="site-footer__links">
         <li><a href="mailto:roseprincess0331@gmail.com">이메일</a></li>
-        <li><a href="https://github.com" target="_blank" rel="noopener">GitHub</a></li>
-        <li><a href="signUp.html">회원가입</a></li>
-        <li><a href="guestbook.html">방명록</a></li>
+        <li><a href="https://github.com/inwoo-jang" target="_blank" rel="noopener">GitHub</a></li>
+        <li class="footer-signup"><a href="signUp.html">회원가입</a></li>
       </ul>
     </div>
     <p class="site-footer__copy">© 2026 장인우 · SKALA 4기</p>
@@ -293,5 +354,6 @@
   <script src="../script/auth.js"></script>
   <script src="../script/nav.js"></script>
   <script src="../script/profileMusic.js"></script>
+  <script src="../script/fingerCursor.js"></script>
 </body>
 </html>

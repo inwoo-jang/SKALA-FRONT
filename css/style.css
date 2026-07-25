@@ -345,7 +345,7 @@ main > .home-title:first-child {
 
 .nav-list {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;   /* 두 줄로 넘어가지 않게 항상 한 줄 유지 */
   gap: var(--sp-2);
   list-style: none;
   margin: 0;
@@ -361,7 +361,7 @@ main > .home-title:first-child {
 
 .nav-list a {
   display: block;
-  padding: var(--sp-2) var(--sp-5);
+  padding: var(--sp-2) var(--sp-4);
   border-radius: var(--r-full);
   font-family: var(--font-mono);
   font-size: 0.75rem;
@@ -385,6 +385,11 @@ main > .home-title:first-child {
   display: flex;
   align-items: center;
   gap: var(--sp-2);
+}
+
+/* 로그인·회원가입 — 글자 수가 달라도 같은 너비로 나란히 */
+.topbar__auth .btn {
+  min-width: 5.5rem;
 }
 
 /* 모바일 햄버거 버튼 — 넓은 화면에서는 숨긴다 */
@@ -426,54 +431,57 @@ main > .home-title:first-child {
   font-family: inherit;
   font-size: 0.875rem;
   font-weight: 700;
+  letter-spacing: -0.01em;
   line-height: 1.2;
   cursor: pointer;
   background: none;
-  transition: transform var(--t-jelly), box-shadow var(--t-base),
+  transition: transform .16s ease, box-shadow .22s ease,
               background-color var(--t-fast), color var(--t-fast),
               border-color var(--t-fast);
 }
 
 .btn:hover {
   text-decoration: none;
-  transform: translateY(-2px) scale(1.03);
+  transform: translateY(-1px);
 }
 
-/* 젤리 — 누르면 눌렸다가 통통 튄다 */
 .btn:active {
-  transform: translateY(0) scale(.93);
-  transition: transform .08s ease;
+  transform: translateY(0) scale(.96);
+  transition: transform .09s ease;
 }
 
 .btn--primary {
   background-color: var(--sky-500);
   color: var(--surface);
-  box-shadow: 0 2px 0 var(--sky-600), 0 6px 18px var(--glow-sky-soft);
+  box-shadow: 0 2px 8px rgba(61, 110, 147, .28);
 }
 
-/* 네온 — 호버 시 하늘색 잔광이 번진다 */
+/* 호버 — 색이 또렷해지고 하늘색 그림자가 살짝 커진다 */
 .btn--primary:hover {
-  background-color: var(--sky-400);
-  box-shadow: 0 2px 0 var(--sky-600),
-              0 0 0 4px var(--glow-sky-soft),
-              0 8px 28px var(--glow-sky);
-  animation: jelly .5s var(--t-jelly);
+  background-color: var(--sky-600);
+  box-shadow: 0 6px 18px rgba(61, 110, 147, .34);
 }
 
 .btn--primary:active {
-  box-shadow: 0 0 0 var(--sky-600), 0 2px 10px var(--glow-sky-soft);
+  background-color: var(--sky-600);
+  box-shadow: 0 1px 4px rgba(61, 110, 147, .3);
 }
 
 .btn--ghost {
-  background-color: var(--surface);
+  background-color: transparent;
   color: var(--sky-600);
-  border-color: var(--line-2);
+  border: 1.5px solid var(--sky-200);
 }
 
+/* 호버 — 옅은 하늘 배경이 채워지고 테두리가 또렷해진다 */
 .btn--ghost:hover {
   background-color: var(--sky-50);
-  border-color: var(--sky-300);
-  box-shadow: 0 0 0 4px var(--glow-sky-soft);
+  border-color: var(--sky-400);
+  color: var(--sky-700);
+}
+
+.btn--ghost:active {
+  background-color: var(--sky-100);
 }
 
 .btn--mini {
@@ -513,12 +521,49 @@ main > .home-title:first-child {
   gap: var(--sp-3);
 }
 
-@keyframes jelly {
-  0%   { transform: translateY(-2px) scale(1.03, 1.03); }
-  30%  { transform: translateY(-2px) scale(1.10, 0.92); }
-  55%  { transform: translateY(-2px) scale(0.96, 1.06); }
-  75%  { transform: translateY(-2px) scale(1.04, 0.98); }
-  100% { transform: translateY(-2px) scale(1.03, 1.03); }
+/* 나란한 두 버튼을 같은 너비로 */
+.btn-row--equal .btn {
+  flex: 1 1 0;
+}
+
+/* 간단한 바로가기 — 텍스트 + 화살표만, 얇은 구분선 */
+.quick-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--line);
+}
+
+.quick-links li {
+  border-bottom: 1px solid var(--line);
+}
+
+.quick-links a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-3);
+  padding: var(--sp-3) var(--sp-2);
+  color: var(--ink);
+  font-weight: 700;
+  font-size: 0.9375rem;
+  transition: padding-left var(--t-base), color var(--t-fast);
+}
+
+.quick-links a:hover {
+  padding-left: var(--sp-4);
+  color: var(--sky-600);
+  text-decoration: none;
+}
+
+.quick-links__arrow {
+  color: var(--text-dim);
+  transition: transform var(--t-base), color var(--t-fast);
+}
+
+.quick-links a:hover .quick-links__arrow {
+  transform: translateX(4px);
+  color: var(--sky-600);
 }
 
 /* ---------- 10. 벤토 히어로 ---------- */
@@ -2366,13 +2411,232 @@ main {
   gap: var(--sp-5);
 }
 
+/* 좋아하는 것들(색·운동 / 음악) — 좁은 왼쪽 + 넓은 오른쪽 2열.
+   음악 앨범이 남는 가로 공간으로 펼쳐지도록 오른쪽을 넓게 준다 */
+.taste-grid--fav {
+  grid-template-columns: minmax(0, 240px) minmax(0, 1fr);
+  align-items: start;
+}
+
+/* 좋아하는 음악 — 커버플로우: 가운데 크게 + 양옆 비스듬히(3D), 좌우 슬라이딩 */
+.coverflow {
+  position: relative;
+  margin-top: var(--sp-2);
+  padding: var(--sp-3) var(--sp-5) 0;
+  perspective: 1000px;
+  overflow: hidden;   /* 옆으로 물러난 카드가 화면 밖으로 넘쳐 가로 스크롤 나는 걸 막는다 */
+  outline: none;
+  /* 옆 카드가 가운데에서 얼마나 벌어질지 — 좁아지면 값을 줄여 뒤로 파고들게 한다 */
+  --cf-shift: 78%;
+}
+
+/* 폭이 좁아질수록 옆 카드를 가운데 뒤로 더 밀어넣어(가려지는 면적 ↑) 잘리지 않게 한다 */
+@media (max-width: 1024px) {
+  .coverflow { --cf-shift: 58%; }
+}
+
+/* 태블릿 미만 — 색·운동 / 음악을 세로로 쌓아 음악이 넉넉한 폭을 갖게 한다 */
+@media (max-width: 767px) {
+  .taste-grid--fav { grid-template-columns: 1fr; }
+  .coverflow { --cf-shift: 50%; }
+}
+
+@media (max-width: 560px) {
+  .coverflow { --cf-shift: 40%; }
+}
+
+@media (max-width: 420px) {
+  .coverflow { --cf-shift: 30%; }
+}
+
+.coverflow__track {
+  position: relative;
+  height: 264px;   /* 그랩바 + 커버 + 곡 정보 카드 */
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+  transform-style: preserve-3d;
+}
+
+/* 플레이어 카드 — 앨범색 그라데이션 + 미세 노이즈 질감 + 그림자로 입체감.
+   투명도 대신 불투명 배경이라 배경 위에서도 또렷하다 */
+.coverflow__item {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 172px;
+  margin-left: -86px;
+  padding: var(--sp-3);
+  border-radius: var(--r-lg);
+  --c1: #8A8072;   /* 위(밝은 쪽) — nth-child로 앨범색 지정 */
+  --c2: #5B5349;   /* 아래(어두운 쪽) */
+  background-color: var(--c2);
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.45'/%3E%3C/svg%3E"),
+    linear-gradient(158deg, var(--c1), var(--c2));
+  background-size: 140px 140px, cover;
+  background-repeat: repeat, no-repeat;
+  background-blend-mode: soft-light, normal;
+  box-shadow: 0 18px 38px rgba(20, 24, 28, 0.28),
+              inset 0 1px 0 rgba(255, 255, 255, 0.14);
+  cursor: pointer;
+  transition: transform .55s cubic-bezier(.25, .8, .3, 1), opacity .55s ease;
+}
+
+/* 상단 그랩바 — 플레이어 시트 느낌 */
+.coverflow__item::before {
+  content: "";
+  display: block;
+  width: 40px;
+  height: 4px;
+  margin: 0 auto var(--sp-3);
+  border-radius: var(--r-full);
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+/* 앨범 커버에서 딴 색 — 위(밝은)/아래(어두운) 2톤 그라데이션 */
+.coverflow__item:nth-child(1) { --c1: #8A8072; --c2: #5B5349; }  /* 허회경 — 웜그레이 */
+.coverflow__item:nth-child(2) { --c1: #7C9471; --c2: #4C6147; }  /* 알레프 — 그린 */
+.coverflow__item:nth-child(3) { --c1: #8286D6; --c2: #4A4E9E; }  /* 봉훈 — 인디고 */
+.coverflow__item:nth-child(4) { --c1: #6E7C8A; --c2: #414B57; }  /* dori — 슬레이트 */
+.coverflow__item:nth-child(5) { --c1: #9A8C80; --c2: #66594E; }  /* 죠지 — 타우프 */
+.coverflow__item:nth-child(6) { --c1: #7C8794; --c2: #48505E; }  /* 이창섭 — 블루그레이 */
+.coverflow__item:nth-child(7) { --c1: #566178; --c2: #2F374C; }  /* 도규 — 딥네이비 */
+.coverflow__item:nth-child(8) { --c1: #6FA2B8; --c2: #3E6E82; }  /* 그리즐리 — 스카이틸 */
+
+.coverflow__item img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: var(--r-md);
+  box-shadow: 0 10px 22px rgba(20, 24, 28, 0.3);
+}
+
+.coverflow__meta {
+  margin-top: var(--sp-3);
+  padding: 0 var(--sp-1);
+  text-align: left;
+  transition: opacity .4s ease;
+}
+
+.coverflow__song {
+  margin: 0;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  /* 제목이 길면 뒷부분을 …으로 생략 (한 줄) */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 앨범을 누르면 해당 곡 유튜브로 (가운데 카드) */
+.coverflow__link {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+.coverflow__link:hover {
+  text-decoration: none;
+}
+
+.coverflow__artist {
+  margin: 3px 0 0;
+  font-size: 0.6875rem;
+  color: rgba(255, 255, 255, 0.82);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 위치별 3D 배치 — JS가 클래스를 갈아끼우면 부드럽게 슬라이딩된다 */
+.coverflow__item.is-center {
+  transform: translateX(0) rotateY(0deg) scale(1);
+  opacity: 1;
+  z-index: 3;
+  cursor: pointer;   /* 클릭하면 유튜브로 */
+}
+
+.coverflow__item.is-left {
+  transform: translateX(calc(-1 * var(--cf-shift))) rotateY(38deg) scale(.8);
+  opacity: .58;
+  z-index: 2;
+}
+
+.coverflow__item.is-right {
+  transform: translateX(var(--cf-shift)) rotateY(-38deg) scale(.8);
+  opacity: .58;
+  z-index: 2;
+}
+
+.coverflow__item.is-hidden {
+  transform: translateX(0) scale(.55);
+  opacity: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* 가운데 카드만 곡 정보를 보여준다 */
+.coverflow__item:not(.is-center) .coverflow__meta {
+  opacity: 0;
+}
+
+/* 화살표는 커버 세로 중앙(≈108px), 가운데 카드 바로 옆으로 붙인다 */
+.coverflow .slider__nav {
+  top: 108px;
+  z-index: 5;
+}
+
+.coverflow .slider__nav--prev {
+  left: calc(50% - 124px);
+  right: auto;
+}
+
+.coverflow .slider__nav--next {
+  left: auto;
+  right: calc(50% - 124px);
+}
+
+.coverflow__count {
+  margin: var(--sp-4) 0 0;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--text-dim);
+}
+
+/* 첫 hover 때 한 번만 뜨는 코치마크 */
+.coverflow__hint {
+  position: absolute;
+  top: 2.4rem;
+  left: 50%;
+  z-index: 6;
+  padding: var(--sp-1) var(--sp-3);
+  border-radius: var(--r-full);
+  background-color: var(--ink);
+  color: var(--surface);
+  font-size: 0.6875rem;
+  white-space: nowrap;
+  box-shadow: var(--sh-md);
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, 6px);
+  transition: opacity .3s ease, transform .3s ease;
+}
+
+.coverflow__hint.is-show {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
 /* 좋아하는 색 칩 */
 .color-chips {
   display: flex;
   gap: var(--sp-5);
   list-style: none;
   /* 아래 "좋아하는 운동" 소제목과 한 호흡 띄운다 */
-  margin: 0 0 var(--sp-6);
+  margin: 0 0 calc(var(--sp-6) + var(--sp-2));
   padding: 0;
 }
 
@@ -2937,6 +3201,67 @@ main {
   letter-spacing: -0.02em;
 }
 
+/* 강의 시간표 하단 — 돌아가기 오른쪽 정렬 */
+.class-foot {
+  text-align: right;
+}
+
+/* 강의 일정 — 주차별 표 블록 사이 간격 */
+.week-block {
+  margin-bottom: var(--sp-5);
+  scroll-margin-top: var(--sp-5);
+}
+
+/* 주간 보기 — 표 양옆에 이전/다음 주 화살표 자리 */
+.week-single {
+  position: relative;
+  padding-inline: 3rem;
+}
+
+.week-jump {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: var(--r-full);
+  background-color: var(--surface);
+  box-shadow: var(--sh-sm);
+  color: var(--ink);
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background-color var(--t-fast), color var(--t-fast),
+              opacity var(--t-fast), transform .16s ease;
+}
+
+.week-jump--prev { left: 0; }
+.week-jump--next { right: 0; }
+
+.week-jump:hover {
+  background-color: var(--sky-50);
+  color: var(--sky-600);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.week-jump:active {
+  transform: translateY(-50%) scale(.92);
+}
+
+.week-jump:disabled {
+  opacity: .3;
+  cursor: not-allowed;
+}
+
+@media (max-width: 560px) {
+  .week-single { padding-inline: 2.25rem; }
+  .week-jump { width: 34px; height: 34px; font-size: 1.25rem; }
+}
+
 .cal-side__desc {
   margin: 0 0 var(--sp-4);
   font-size: 0.8125rem;
@@ -3027,9 +3352,43 @@ td {
 }
 
 .schedule {
+  width: 100%;
+  min-width: 36rem;      /* 좁아지면 찌그러지지 말고 가로 스크롤 (시간 열은 고정) */
+  table-layout: fixed;   /* 월~금 칸 균등 (내용과 무관하게 같은 너비) */
+  /* collapse면 sticky 셀의 배경·경계선이 함께 안 움직여 색이 새고 선이 사라진다 */
+  border-collapse: separate;
+  border-spacing: 0;
   background: none;
   border-radius: 0;
   overflow: visible;
+}
+
+/* 시간 열(첫 열) — 좁게 고정 + 가로 스크롤 시 왼쪽에 붙박이(불투명 배경·실선) */
+.schedule thead th:first-child {
+  width: 6.5rem;
+  position: sticky;
+  left: 0;
+  z-index: 6;
+  background-color: var(--surface);
+  /* 좌우를 빈 서페이스로 마스킹해 누수 차단 + 오른쪽에 구분 실선 */
+  box-shadow: -8px 0 0 var(--surface), 5px 0 0 var(--surface), 6px 0 0 var(--line-2);
+}
+
+.schedule td,
+.schedule tbody th {
+  overflow-wrap: break-word;
+}
+
+/* 셀 높이 고정 — 내용 길이와 무관하게 표 크기가 일정하게 */
+.schedule thead th {
+  height: 3rem;
+}
+
+.schedule tbody th,
+.schedule tbody td {
+  height: 4.75rem;
+  vertical-align: middle;
+  overflow: hidden;
 }
 
 /* 머리행 — 잉크 라인 아래 모노 타이포 */
@@ -3041,6 +3400,11 @@ td {
   font-size: 0.75rem;
   letter-spacing: .06em;
   border-bottom: 2px solid var(--ink);
+}
+
+/* 요일 사이 점선 (첫 행) — 시간|월 경계는 실선이므로 화요일부터 */
+.schedule thead th:nth-child(n + 3) {
+  border-left: 1px dashed var(--line-2);
 }
 
 .schedule thead th small {
@@ -3058,9 +3422,14 @@ td {
   color: var(--sky-400);
 }
 
-/* 시간 열 */
+/* 시간 열 — 가로 스크롤 시 왼쪽에 붙박이(불투명 배경 + 오른쪽 실선) */
 .schedule tbody th {
-  background: none;
+  position: sticky;
+  left: 0;
+  z-index: 5;
+  background-color: var(--surface);
+  /* 좌우를 빈 서페이스로 마스킹해 누수 차단 + 오른쪽에 구분 실선 */
+  box-shadow: -8px 0 0 var(--surface), 5px 0 0 var(--surface), 6px 0 0 var(--line-2);
   border-bottom: 1px dashed var(--line-2);
   text-align: right;
   padding-right: var(--sp-4);
@@ -3071,6 +3440,11 @@ td {
   border-left: 1px dashed var(--line-2);
   border-bottom: 1px dashed var(--line-2);
   padding: var(--sp-4) var(--sp-3);
+}
+
+/* 시간|월 경계는 시간 열의 실선으로 대신하므로 첫 요일 칸 왼쪽 점선 제거 */
+.schedule tbody td:first-of-type {
+  border-left: 0;
 }
 
 .schedule tbody tr:last-child th,
@@ -3093,6 +3467,7 @@ td {
 .cell--peach    { background-color: var(--peach-bg); }
 .cell--lavender { background-color: var(--lavender-bg); }
 .cell--pink     { background-color: var(--pink-bg); }
+.cell--mint     { background-color: var(--mint-bg); }
 
 td.lunch {
   background-color: var(--surface-2);
@@ -3109,15 +3484,74 @@ tbody tr:last-child td {
 .day-block {
   background-color: var(--surface);
   border: 1px solid var(--line);
-  border-left: 5px solid var(--peach-ink);
-  border-radius: var(--r-md);
+  border-left: 4px solid var(--ink);
+  border-radius: var(--r-lg);
   padding: var(--sp-5);
-  margin-bottom: var(--sp-4);
+  margin-bottom: var(--sp-5);
+  box-shadow: var(--sh-sm);
 }
 
-.day-block h2 {
-  margin: 0 0 var(--sp-3);
+/* 시간대 머리 — 파스텔 칩 + 제목, 아래 구분선 */
+.day-block__head {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  margin: 0 0 var(--sp-4);
+  padding-bottom: var(--sp-3);
+  border-bottom: 1px solid var(--line);
 }
+
+.day-block__head h2 {
+  margin: 0;
+  font-size: 1.1875rem;
+}
+
+.day-block__chip {
+  flex: none;
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  padding: var(--sp-1) var(--sp-3);
+  border-radius: var(--r-full);
+  background-color: var(--ink);
+  color: var(--surface);
+}
+
+/* 하루 일과 타임라인 — 모노 시간 + 내용, 항목 사이 점선 */
+.day-plan {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.day-plan li {
+  display: grid;
+  grid-template-columns: 3.5rem 1fr;
+  gap: var(--sp-4);
+  align-items: baseline;
+  padding: var(--sp-3) 0;
+}
+
+.day-plan li + li {
+  border-top: 1px dashed var(--line-2);
+}
+
+.day-plan__time {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--sky-600);
+}
+
+.day-plan__text {
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--text);
+}
+
+/* 시간대 구분은 블랙으로 통일 (칩·좌측 라인 모두 잉크색) */
 
 /* ---------- 23. 책장 ---------- */
 .shelf-hint {
@@ -3355,25 +3789,35 @@ tbody tr:last-child td {
   list-style: none;
   margin: 0;
   padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
 }
 
+/* 밑줄 그은 문장 — 배경 톤에 맞춘 종이 카드 + 명조체 + 큰 여는 따옴표 */
 .book-quotes li {
-  margin-bottom: var(--sp-2);
-  padding: var(--sp-1) 0 var(--sp-1) var(--sp-4);
-  border-left: 2px solid var(--lavender-ink);
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-size: 1.0625rem;
-  line-height: 1.6;
+  position: relative;
+  margin: 0;
+  padding: var(--sp-2) var(--sp-4) var(--sp-2) var(--sp-6);
+  border-radius: var(--r-sm);
+  background-color: var(--bg);
+  box-shadow: inset 0 0 0 1px rgba(120, 105, 85, .10);
+  font-family: "Nanum Myeongjo", var(--font-serif), serif;
+  font-size: 0.9375rem;
+  line-height: 1.7;
   color: var(--ink);
 }
 
 .book-quotes li::before {
-  content: "“";
-}
-
-.book-quotes li::after {
-  content: "”";
+  content: "\201C";
+  position: absolute;
+  left: 0.5rem;
+  top: 0.25rem;
+  font-family: "Nanum Myeongjo", serif;
+  font-size: 1.5rem;
+  line-height: 1;
+  color: var(--shelf-edge);
+  opacity: .5;
 }
 
 /* ---------- 24. 여행 사진 피드 ---------- */
@@ -3632,9 +4076,9 @@ tbody tr:last-child td {
   position: relative;
   display: flex;
   flex-direction: column;
-  /* 세로로 긴 연습장 비율 */
-  min-height: 860px;
-  padding: var(--sp-5) var(--sp-5) var(--sp-5) var(--sp-8);
+  /* 페이지마다 높이가 달라지지 않도록 고정 — 넘치면 페이지 안에서 스크롤 */
+  height: min(860px, 82vh);
+  padding: var(--sp-4) var(--sp-3) var(--sp-4) var(--sp-7);
   background-color: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--r-md) var(--r-lg) var(--r-lg) var(--r-md);
@@ -3667,10 +4111,13 @@ tbody tr:last-child td {
 .note__shot {
   margin: var(--sp-4) 0;
   transform: rotate(-0.4deg);
+  text-align: center;
 }
 
 .note__shot img {
-  width: 100%;
+  width: auto;
+  max-width: 100%;
+  max-height: 220px;   /* 연습장 안에 들어오도록 크기 축소 */
   height: auto;
   border: 1px solid var(--line);
   border-radius: var(--r-sm);
@@ -3754,24 +4201,50 @@ tbody tr:last-child td {
 .note__body {
   position: relative;
   flex: 1 1 auto;
+  min-height: 0;        /* flex 안에서 body가 정해진 높이를 갖도록 */
+  overflow: hidden;
   perspective: 1600px;
-  perspective-origin: -49px center;
+  perspective-origin: 0 center;
 }
 
 .note__page {
+  /* 페이지는 body를 가득 채우고, 내용이 넘치면 안에서 스크롤 */
+  position: absolute;
+  inset: 0;
+  overflow-y: auto;
+  padding-right: 2px;   /* 스크롤바를 오른쪽 끝에 가깝게 */
   /* 넘김 기준선 = 스프링 중심 (종이 바깥 왼쪽) */
-  transform-origin: -49px center;
+  transform-origin: 0 center;
   transform-style: preserve-3d;
   backface-visibility: hidden;
+  /* 무드에 맞는 얇은 스크롤바 */
+  scrollbar-width: thin;
+  scrollbar-color: var(--line-2) transparent;
 }
 
-/* 종이 절반 클릭으로 넘기기 — 방향을 가리키는 손가락 커서 */
-.note__body.zone-next {
-  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='36'%3E%3Ctext y='28' font-size='27'%3E%F0%9F%91%89%3C/text%3E%3C/svg%3E") 18 18, e-resize;
+.note__page::-webkit-scrollbar {
+  width: 8px;
 }
 
-.note__body.zone-prev {
-  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='36'%3E%3Ctext y='28' font-size='27'%3E%F0%9F%91%88%3C/text%3E%3C/svg%3E") 18 18, w-resize;
+.note__page::-webkit-scrollbar-thumb {
+  background-color: var(--line-2);
+  border-radius: var(--r-full);
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+.note__page::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* 종이 절반 클릭으로 넘기기 — 방향을 가리키는 손가락 커서.
+   이모지를 SVG 안에서 흰색 실루엣으로 마스킹(feComposite)하고 그림자로 가시성 확보 */
+.note.zone-next {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Cfilter id='w' x='-40%25' y='-40%25' width='180%25' height='180%25'%3E%3CfeFlood flood-color='white' result='f'/%3E%3CfeComposite in='f' in2='SourceGraphic' operator='in' result='s'/%3E%3CfeDropShadow in='s' dx='0' dy='1' stdDeviation='1.2' flood-color='black' flood-opacity='0.5'/%3E%3C/filter%3E%3Ctext x='4' y='31' font-size='30' filter='url(%23w)'%3E%F0%9F%91%89%3C/text%3E%3C/svg%3E") 20 20, e-resize;
+}
+
+.note.zone-prev {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Cfilter id='w' x='-40%25' y='-40%25' width='180%25' height='180%25'%3E%3CfeFlood flood-color='white' result='f'/%3E%3CfeComposite in='f' in2='SourceGraphic' operator='in' result='s'/%3E%3CfeDropShadow in='s' dx='0' dy='1' stdDeviation='1.2' flood-color='black' flood-opacity='0.5'/%3E%3C/filter%3E%3Ctext x='4' y='31' font-size='30' filter='url(%23w)'%3E%F0%9F%91%88%3C/text%3E%3C/svg%3E") 20 20, w-resize;
 }
 
 /* 넘어가는 종이는 아래 장 위에 겹쳐 놓는다 */
@@ -3915,17 +4388,56 @@ tbody tr:last-child td {
 }
 
 .note__controls {
-  display: flex;
+  display: grid;
+  grid-template-columns: auto 1fr auto;   /* ‹ · 가운데 · › */
   align-items: center;
-  justify-content: space-between;
   gap: var(--sp-3);
   margin-top: var(--sp-5);
   padding-top: var(--sp-4);
   border-top: 1px solid var(--line);
 }
 
+/* ‹ › 넘기기 버튼 — 평소엔 옅게, 호버 시 또렷하게 */
+.note__nav {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-full);
+  background-color: transparent;
+  color: var(--text-dim);
+  opacity: .5;
+  font-size: 1.25rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background-color var(--t-fast), border-color var(--t-fast),
+              color var(--t-fast), opacity var(--t-fast), transform .16s ease;
+}
+
+.note__nav:hover {
+  opacity: 1;
+  background-color: var(--sky-50);
+  border-color: var(--sky-300);
+  color: var(--sky-600);
+  transform: translateY(-1px);
+}
+
+.note__nav:active {
+  transform: translateY(0) scale(.94);
+}
+
+.note__nav:disabled {
+  opacity: .25;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
 /* 목록으로 — 버튼 티 없이 작은 글자만 */
 .note__back {
+  display: block;
+  width: fit-content;
+  margin: var(--sp-4) auto 0;   /* 연습장 아래 가운데 */
   padding: 0;
   border: none;
   background: none;
@@ -3945,6 +4457,7 @@ tbody tr:last-child td {
 
 .note__count {
   margin: 0;
+  text-align: center;
   font-family: var(--font-mono);
   font-size: 0.75rem;
   color: var(--text-dim);
@@ -4085,11 +4598,47 @@ tbody tr:last-child td {
   overflow: hidden;
 }
 
+/* 사진 + 양옆 화살표를 담는 틀 */
+.viewer__frame {
+  position: relative;
+}
+
 .viewer__figure img {
   width: 100%;
   max-height: 68vh;
   object-fit: contain;
   background-color: var(--surface-2);
+  cursor: pointer;   /* 좌우 절반 클릭으로 넘기기 */
+}
+
+/* 사진 양옆 화살표 — 테두리 없이 사진 위에 */
+.viewer__side {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  border: none;
+  background: none;
+  padding: var(--sp-2) var(--sp-3);
+  color: #fff;
+  font-size: 2.75rem;
+  line-height: 1;
+  cursor: pointer;
+  opacity: .8;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, .55);
+  transition: opacity var(--t-fast), transform .16s ease;
+}
+
+.viewer__side--prev { left: var(--sp-2); }
+.viewer__side--next { right: var(--sp-2); }
+
+.viewer__side:hover {
+  opacity: 1;
+  transform: translateY(-50%) scale(1.18);
+}
+
+.viewer__side:active {
+  transform: translateY(-50%) scale(.92);
 }
 
 .viewer__cap {
@@ -4390,24 +4939,93 @@ tbody tr:last-child td {
 }
 
 /* ---------- 25. 폼 ---------- */
-.auth-form fieldset {
-  border: 1px solid var(--line);
-  border-radius: var(--r-lg);
-  padding: var(--sp-5);
-  margin: 0 0 var(--sp-5);
+/* 로그인·회원가입 전용 타이틀 — 다른 메뉴 페이지의 좌측 정렬 에디토리얼 제목과 달리,
+   이모지를 은은히 빛나는 원형 배지로 올리고 아래에 세리프 워드마크를 중앙 정렬한다 */
+.auth-head {
+  text-align: center;
+  margin-bottom: var(--sp-6);
 }
 
+.auth-title {
+  font-size: clamp(1.75rem, 4vw, 2.375rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  margin-bottom: var(--sp-3);
+}
+
+.auth-title__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.25rem;
+  height: 3.25rem;
+  margin: 0 auto var(--sp-4);
+  font-size: 1.5rem;
+  background-image: radial-gradient(circle at 32% 26%, var(--surface), var(--sky-50));
+  border: 1px solid var(--sky-100);
+  border-radius: var(--r-full);
+  box-shadow: 0 8px 22px var(--glow-sky-soft),
+              inset 0 1px 0 rgba(255, 255, 255, .8);
+}
+
+/* 강조 단어(로그인/회원가입) — 기울임 없이 같은 볼드 산세리프에
+   하늘색만 입혀 깔끔하게. 밑줄·세리프 이탤릭 제거로 지저분함을 없앤다 */
+.auth-title em {
+  font-family: inherit;
+  font-style: normal;
+  font-weight: 800;
+  color: var(--sky-500);
+  background: none;
+  padding: 0;
+}
+
+.auth-head .page-desc {
+  max-width: 36ch;
+  margin: 0 auto;
+}
+
+/* 큰 섹션(계정 정보·개인 프로필 정보·가입동기) — 테두리 상자 없이
+   블랙박스 타이틀 + 필드만. 소그룹(성별·관심분야)만 박스로 남는다 */
+.auth-form fieldset {
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+
+/* 섹션마다 테두리 박스(카드) — 블랙박스 타이틀이 상단 테두리에 얹힌다.
+   성별·관심분야는 이 박스 안에 다시 작은 박스로 들어간다 */
+.auth-form > fieldset {
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  padding: var(--sp-4) var(--sp-5) var(--sp-5);
+}
+
+.auth-form > fieldset + fieldset {
+  margin-top: var(--sp-5);
+}
+
+/* 섹션 타이틀(블랙박스) — 둥근 모서리에서 살짝 띄우고 첫 필드와 간격 */
+.auth-form > fieldset > legend {
+  margin-bottom: var(--sp-3);
+  margin-left: var(--sp-2);
+}
+
+/* 블랙박스 — 각진 검정 태그 + 모노 대문자. 터미널 라벨 같은 담백한 느낌 */
 .auth-form legend {
-  padding: var(--sp-1) var(--sp-4);
+  padding: var(--sp-1) var(--sp-3);
   background-color: var(--ink);
   color: var(--surface);
-  border-radius: var(--r-full);
+  border: 0;
+  border-radius: 6px;
   font-family: var(--font-mono);
   font-size: 0.6875rem;
-  letter-spacing: 0.06em;
+  font-weight: 700;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
+/* 성별·관심분야 — 테두리 있는 소그룹 박스 유지 */
 .field-group {
   border: 1px solid var(--line) !important;
   border-radius: var(--r-md) !important;
@@ -4586,53 +5204,9 @@ input[type="radio"] {
   margin: var(--sp-5) 0 0;
 }
 
-.form-actions .btn--primary {
+/* 로그인·회원가입 폼 버튼 — 두 개를 같은 너비로 나란히 */
+.form-actions .btn {
   flex: 1;
-}
-
-input[type="submit"],
-input[type="reset"] {
-  padding: var(--sp-3) var(--sp-6);
-  font-family: inherit;
-  font-size: 0.875rem;
-  font-weight: 700;
-  border: 1px solid transparent;
-  border-radius: var(--r-full);
-  cursor: pointer;
-  transition: transform var(--t-jelly), box-shadow var(--t-base),
-              background-color var(--t-fast);
-}
-
-input[type="submit"] {
-  flex: 1;
-  background-color: var(--sky-500);
-  color: var(--surface);
-  box-shadow: 0 2px 0 var(--sky-600), 0 6px 18px var(--glow-sky-soft);
-}
-
-input[type="submit"]:hover {
-  background-color: var(--sky-400);
-  transform: translateY(-2px) scale(1.02);
-  box-shadow: 0 2px 0 var(--sky-600),
-              0 0 0 4px var(--glow-sky-soft),
-              0 8px 28px var(--glow-sky);
-}
-
-input[type="submit"]:active,
-input[type="reset"]:active {
-  transform: scale(.93);
-  transition: transform .08s ease;
-}
-
-input[type="reset"] {
-  background-color: var(--surface);
-  color: var(--sky-600);
-  border-color: var(--line-2);
-}
-
-input[type="reset"]:hover {
-  background-color: var(--sky-50);
-  border-color: var(--sky-300);
 }
 
 .auth-link {
@@ -4853,14 +5427,46 @@ input[type="reset"]:hover {
 /* ---------- 28. 반응형 ---------- */
 
 /* 태블릿 — 아이패드 세로(768px)부터 2단 유지 */
+/* iPad·모바일 — 로그인 페이지에 회원가입이 있으니 상단은 로그인만 남긴다 */
+@media (max-width: 1024px) {
+  .topbar__auth .btn--primary {
+    display: none;
+  }
+}
+
 @media (min-width: 768px) and (max-width: 1024px) {
   .taste-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  /* 6개 메뉴가 한 줄에 들어가도록 여백을 줄인다 */
+  /* iPad 구간 — 로고·메뉴·인증 버튼이 한 줄에 들어가도록 촘촘히 */
+  .topbar {
+    gap: var(--sp-2);
+    padding: var(--sp-3) var(--sp-4);
+  }
+
+  .topbar__logo {
+    font-size: 1.25rem;
+  }
+
+  .nav-list {
+    gap: 2px;
+    padding: var(--sp-1);
+  }
+
   .nav-list a {
     padding: var(--sp-2) var(--sp-3);
+  }
+
+  .topbar__auth {
+    gap: var(--sp-1);
+  }
+
+  /* 회원가입이 숨겨져 공간이 있으니 로그인은 데스크탑과 비슷한 크기로 */
+  .topbar__auth .btn {
+    min-width: 0;
+    padding: var(--sp-3) var(--sp-4);
+    font-size: 0.875rem;
   }
 
   /* 연습장 두 권을 나란히 두기엔 좁은 구간 */
@@ -4893,6 +5499,7 @@ input[type="reset"]:hover {
   .topbar__auth .btn {
     padding: var(--sp-2) var(--sp-3);
     font-size: 0.75rem;
+    min-width: 4.75rem;
   }
 
   /* 햄버거 버튼 — 로고 왼쪽, 로그인 버튼 오른쪽 끝에 배치 */
@@ -4976,9 +5583,10 @@ input[type="reset"]:hover {
     aspect-ratio: 4 / 5;
   }
 
-  /* 본문 + 사이드바 세로 배치 */
+  /* 본문 + 사이드바 세로 배치 — 자식이 화면 폭을 꽉 채우게 stretch */
   .layout {
     flex-direction: column;
+    align-items: stretch;
   }
 
   /* 사이드바 껍데기를 풀어 패널들을 본문과 같은 축에 세운다.
@@ -5021,12 +5629,12 @@ input[type="reset"]:hover {
 
   .note__body,
   .page-portfolio .note__body {
-    perspective-origin: -31px center;
+    perspective-origin: -16px center;
   }
 
   .note__page,
   .page-portfolio .note__page {
-    transform-origin: -31px center;
+    transform-origin: -16px center;
   }
 
   .note__rings {
@@ -5144,8 +5752,7 @@ input[type="reset"]:hover {
     flex-direction: column;
   }
 
-  input[type="submit"],
-  input[type="reset"] {
+  .form-actions .btn {
     width: 100%;
   }
 
@@ -5316,11 +5923,11 @@ body {
 }
 
 .page-portfolio .note__body {
-  perspective-origin: -73px center;
+  perspective-origin: -48px center;
 }
 
 .page-portfolio .note__page {
-  transform-origin: -73px center;
+  transform-origin: -48px center;
 }
 
 .page-portfolio .note__cover-title {
@@ -5528,10 +6135,33 @@ body {
   border-radius: 1px;
   background: var(--paper-white);
   box-shadow: 0 18px 50px rgba(39, 31, 23, .10);
+  /* 어떤 책을 펼쳐도 크기가 일정하게 — 내용이 길면 페이지 안에서 스크롤 */
+  height: min(560px, 66vh);
+  overflow: hidden;
 }
 
 .book-open__page {
   min-width: 0;
+  overflow-y: auto;
+  padding-right: 2px;   /* 스크롤바를 오른쪽 끝에 가깝게 */
+  /* 무드에 맞는 얇은 스크롤바 */
+  scrollbar-width: thin;
+  scrollbar-color: var(--line-2) transparent;
+}
+
+.book-open__page::-webkit-scrollbar {
+  width: 7px;
+}
+
+.book-open__page::-webkit-scrollbar-thumb {
+  background-color: var(--line-2);
+  border-radius: var(--r-full);
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+.book-open__page::-webkit-scrollbar-track {
+  background: transparent;
 }
 
 .book-open__page .book-sub:first-child {
@@ -5919,4 +6549,71 @@ body {
     flex: 1 1 auto;
     min-width: 0;
   }
+}
+
+/* ==========================================================
+   31. 커스텀 손가락 커서 + 반짝이
+   (홈 Recent trip · 프로필 앨범 등 [data-finger-zone] 영역 전용)
+   ========================================================== */
+
+/* 마우스를 따라다니는 손가락 */
+.finger-cursor {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .15s ease;
+  will-change: transform;
+}
+
+.finger-cursor.is-visible {
+  opacity: 1;
+}
+
+.finger-cursor__emoji {
+  display: block;
+  font-size: 1.5rem;
+  line-height: 1;
+  transform: translate(-50%, -4%);
+  /* 노란 이모지를 흰색 실루엣으로 — brightness(0)로 검게, invert(1)로 희게 */
+  filter: brightness(0) invert(1) drop-shadow(0 1px 2px rgba(20, 24, 28, .45));
+}
+
+/* 클릭 가능한 대상 위에서는 손가락이 통통 튄다 */
+.finger-cursor.is-bouncing .finger-cursor__emoji {
+  animation: finger-bounce .55s ease infinite;
+}
+
+@keyframes finger-bounce {
+  0%, 100% { transform: translate(-50%, -4%)  scale(1); }
+  50%      { transform: translate(-50%, -34%) scale(1.12); }
+}
+
+/* 마우스 중심에서 가볍게 흩어지는 반짝이 — 4각 별이 팝하며 트윙클 */
+.sparkle {
+  position: fixed;
+  z-index: 9998;
+  width: var(--size, 6px);
+  height: var(--size, 6px);
+  margin-top: calc(var(--size, 6px) / -2);
+  margin-left: calc(var(--size, 6px) / -2);
+  pointer-events: none;
+  background: #fff;
+  clip-path: polygon(50% 0%, 61% 39%, 100% 50%, 61% 61%, 50% 100%, 39% 61%, 0% 50%, 39% 39%);
+  filter: drop-shadow(0 0 2px rgba(255, 255, 255, .9));
+  animation: sparkle-twinkle .7s ease forwards;
+}
+
+@keyframes sparkle-twinkle {
+  0%   { transform: translate(0, 0) scale(0) rotate(0deg); opacity: 0; }
+  35%  { transform: translate(calc(var(--dx, 0) * .35), calc(var(--dy, -6px) * .35)) scale(1) rotate(35deg); opacity: 1; }
+  100% { transform: translate(var(--dx, 0), var(--dy, -14px)) scale(0) rotate(80deg); opacity: 0; }
+}
+
+/* 커스텀 커서가 켜진 영역에선 기본 커서를 숨긴다 */
+.finger-zone--active,
+.finger-zone--active * {
+  cursor: none !important;
 }

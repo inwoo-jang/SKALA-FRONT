@@ -24,8 +24,20 @@ var currentTrack = 0;
 var failedCount = 0;  // 연속으로 못 읽은 곡 수 — 전부 실패하면 멈춘다
 var wantPlaying = false;  // 듣던 중이었는지 — 곡 건너뛰기/이어재생 판단용
 
+/** BGM을 틀기 전에 재생 중인 피드 영상을 모두 멈춘다 — 소리가 겹치지 않게.
+    (feedVideos는 아래에서 채워지지만, safePlay는 초기 실행이 끝난 뒤
+     이벤트에서만 호출되므로 이 시점엔 항상 값이 채워져 있다) */
+function pauseFeedVideos() {
+  if (!feedVideos) { return; }
+  for (var i = 0; i < feedVideos.length; i++) {
+    if (!feedVideos[i].paused) { feedVideos[i].pause(); }
+  }
+}
+
 /** play()는 브라우저 자동재생 정책으로 거부될 수 있어 항상 감싸서 부른다 */
 function safePlay() {
+  pauseFeedVideos();  // 영상 소리와 BGM이 겹치지 않게, 틀기 직전에 영상을 멈춘다
+
   var attempt = tripBgm.play();
 
   if (attempt && attempt.catch) {

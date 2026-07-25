@@ -19,8 +19,16 @@ function initNotebook(note) {
   var countEl = note.querySelector(".note__count");
   var body = note.querySelector(".note__body");
   var backEl = note.querySelector("[data-back]");
+  var prevEl = note.querySelector("[data-prev]");
+  var nextEl = note.querySelector("[data-next]");
   var current = 0;
   var busy = false;
+
+  /** 표지에선 이전 버튼, 마지막 장에선 다음 버튼을 비활성화한다. */
+  function updateNav() {
+    if (prevEl) { prevEl.disabled = (current === 0); }
+    if (nextEl) { nextEl.disabled = (current === pages.length - 1); }
+  }
 
   /** 넘기는 중에 붙은 클래스를 떼고 원래 자리로 돌린다. */
   function cleanUp(page) {
@@ -81,6 +89,7 @@ function initNotebook(note) {
 
     // 표지에서는 "목록으로"를 감춘다
     backEl.hidden = (index === 0);
+    updateNav();
   }
 
   // 목차 클릭 · 목록으로 돌아가기
@@ -93,6 +102,16 @@ function initNotebook(note) {
 
     if (event.target.closest("[data-back]")) {
       openPage(0, "prev");
+      return;
+    }
+
+    if (event.target.closest("[data-prev]")) {
+      openPage(current - 1, "prev");
+      return;
+    }
+
+    if (event.target.closest("[data-next]")) {
+      openPage(current + 1, "next");
     }
   });
 
@@ -101,14 +120,15 @@ function initNotebook(note) {
      왼쪽 절반을 누르면 이전 장. 커서도 방향 손가락으로 바뀐다.
      ---------------------------------------------------------- */
 
-  /** 마우스 위치가 종이의 오른쪽 절반인가 */
+  /** 마우스 위치가 연습장 전체 기준 오른쪽 절반인가 */
   function isRightHalf(event) {
-    var rect = body.getBoundingClientRect();
+    var rect = note.getBoundingClientRect();
     return (event.clientX - rect.left) > rect.width / 2;
   }
 
-  body.addEventListener("click", function (event) {
-    // 목차 버튼·링크 클릭은 각자 동작에 맡긴다
+  // 연습장 전체가 버튼 — 센터 기준 오른쪽 절반=다음 장, 왼쪽 절반=이전 장
+  note.addEventListener("click", function (event) {
+    // 목차·넘기기 버튼·링크 클릭은 각자 동작에 맡긴다
     if (event.target.closest("button, a")) { return; }
 
     if (isRightHalf(event)) {
@@ -119,18 +139,18 @@ function initNotebook(note) {
   });
 
   // 넘길 수 있는 방향일 때만 손가락 커서를 보여준다
-  body.addEventListener("mousemove", function (event) {
+  note.addEventListener("mousemove", function (event) {
     var overControl = !!event.target.closest("button, a");
     var right = isRightHalf(event);
 
-    body.classList.toggle("zone-next",
+    note.classList.toggle("zone-next",
       !overControl && right && current < pages.length - 1);
-    body.classList.toggle("zone-prev",
+    note.classList.toggle("zone-prev",
       !overControl && !right && current > 0);
   });
 
-  body.addEventListener("mouseleave", function () {
-    body.classList.remove("zone-next", "zone-prev");
+  note.addEventListener("mouseleave", function () {
+    note.classList.remove("zone-next", "zone-prev");
   });
 
   // 방향키로 넘기기
@@ -149,6 +169,7 @@ function initNotebook(note) {
   pages[0].hidden = false;
   countEl.textContent = "";
   backEl.hidden = true;
+  updateNav();
 
   // 버튼이 없어도 키보드(← →)로 넘길 수 있게 초점을 받을 수 있게 한다
   note.setAttribute("tabindex", "0");

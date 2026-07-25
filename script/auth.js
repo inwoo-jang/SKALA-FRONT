@@ -121,5 +121,14 @@ function initLoginForm() {
   });
 }
 
+/** 로그인 상태면 푸터의 회원가입 링크를 숨긴다 */
+function updateFooterAuth() {
+  var signup = document.querySelector(".footer-signup");
+  if (signup && getSession()) {
+    signup.hidden = true;
+  }
+}
+
 renderAuthArea();
 initLoginForm();
+updateFooterAuth();

@@ -12,6 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Space+Mono:wght@400;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
   <link rel="icon" type="image/svg+xml" href="../media/icon/favicon.svg">
   <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/flags.css">
 </head>
 <body class="page-trip">
 
@@ -571,8 +572,12 @@
             </div>
 
             <figure class="viewer__figure">
-              <img id="viewerImg" src="../media/trip/thai2.jpg"
+              <div class="viewer__frame">
+                <button type="button" class="viewer__side viewer__side--prev" id="viewerPrev" aria-label="앞쪽 사진">‹</button>
+                <img id="viewerImg" src="../media/trip/thai2.jpg"
                      alt="밝을 때 왓 아룬을 바라보며 즐긴 태국 음식과 음료" loading="lazy">
+                <button type="button" class="viewer__side viewer__side--next" id="viewerNext" aria-label="뒤쪽 사진">›</button>
+              </div>
               <figcaption class="viewer__cap">
                 <p class="viewer__region" id="viewerRegion"></p>
                 <p class="viewer__place" id="viewerPlace"></p>
@@ -580,11 +585,6 @@
                 <p class="viewer__date" id="viewerDate"></p>
               </figcaption>
             </figure>
-
-            <div class="viewer__nav">
-              <button type="button" class="btn btn--ghost" id="viewerPrev">← 이전</button>
-              <button type="button" class="btn btn--ghost" id="viewerNext">다음 →</button>
-            </div>
           </section>
 
         </div>
@@ -598,22 +598,22 @@
             <button type="button" class="switch__btn is-active"
                     id="btnAbroad" data-region="abroad"
                     role="tab" aria-selected="true" aria-controls="mapAbroad">
-              🌏 해외
+              <span class="flag flag--world" role="img" aria-label="해외"></span> 해외
             </button>
 
             <button type="button" class="switch__btn"
                     id="btnDomestic" data-region="domestic"
                     role="tab" aria-selected="false" aria-controls="mapDomestic">
-              🇰🇷 국내
+              <span class="flag flag--kr" role="img" aria-label="대한민국"></span> 국내
             </button>
           </div>
 
           <p class="trip-count" id="countAbroad">
-            나라 <b>3</b> · 사진 <b>8</b> · 영상 <b>2</b>
+            나라 <b>3</b> · 사진 <b>13</b> · 영상 <b>3</b>
           </p>
 
           <p class="trip-count" id="countDomestic" hidden>
-            도시 <b>4</b> · 사진 <b>7</b> · 영상 <b>3</b>
+            도시 <b>4</b> · 사진 <b>12</b> · 영상 <b>4</b>
           </p>
 
           <div class="map" id="mapAbroad">
@@ -639,7 +639,7 @@
               <span class="map__pin-label">상하이</span>
               <span class="map__pin-card">
                 <span class="map__pin-place">중국 · 상하이</span>
-                <span class="map__pin-count">준비 중 🚧</span>
+                <span class="map__pin-count">📷 4 · 🎬 1</span>
               </span>
             </a>
           </div>
@@ -660,7 +660,7 @@
               <span class="map__pin-label">전주</span>
               <span class="map__pin-card">
                 <span class="map__pin-place">전주</span>
-                <span class="map__pin-count">준비 중 🚧</span>
+                <span class="map__pin-count">📷 5 · 🎬 1</span>
               </span>
             </a>
             <a class="map__pin" href="#tripBusan" style="left:72.9%; top:64.8%">
@@ -697,9 +697,8 @@
       </div>
       <ul class="site-footer__links">
         <li><a href="mailto:roseprincess0331@gmail.com">이메일</a></li>
-        <li><a href="https://github.com" target="_blank" rel="noopener">GitHub</a></li>
-        <li><a href="signUp.html">회원가입</a></li>
-        <li><a href="guestbook.html">방명록</a></li>
+        <li><a href="https://github.com/inwoo-jang" target="_blank" rel="noopener">GitHub</a></li>
+        <li class="footer-signup"><a href="signUp.html">회원가입</a></li>
       </ul>
     </div>
     <p class="site-footer__copy">© 2026 장인우 · SKALA 4기</p>
@@ -709,5 +708,6 @@
   <script src="../script/nav.js"></script>
   <script src="../script/trip.js"></script>
   <script src="../script/filmPlayer.js"></script>
+  <script src="../script/fingerCursor.js"></script>
 </body>
 </html>

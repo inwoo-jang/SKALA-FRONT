@@ -28,7 +28,7 @@
       <ul class="nav-list">
         <li><a href="myProfile.html">Profile</a></li>
         <li><a href="myPortfolio.html">Portfolio</a></li>
-        <li><a href="myCalendar.html" class="is-active">Calendar</a></li>
+        <li><a href="myCalendar.html" class="is-active" aria-current="page">Calendar</a></li>
         <li><a href="myTrip.html">Trip</a></li>
         <li><a href="myReadings.html">Reading</a></li>
         <li><a href="guestbook.html">Guestbook</a></li>
@@ -57,124 +57,12 @@
     <main id="main">
 
       <div class="week-bar">
-        <p class="week-bar__label" id="weekLabel">1·2주차 전체</p>
-        <a href="myCalendar.html" class="btn btn--mini">달력에서 다른 주 고르기</a>
+        <p class="week-bar__label" id="weekLabel">전체 일정</p>
       </div>
 
-      <section class="panel" id="weekPanel1">
-        <h2 class="section-title">1주차 <small>2026.07.13. ~ 07.17.</small></h2>
-        <div class="table-scroll">
-          <table class="schedule">
-            <caption>1주차 강의 시간표</caption>
+      <div id="weekList"></div>
 
-            <thead>
-              <tr>
-                <th scope="col">시간</th>
-                <th scope="col">월<small>07.13</small></th>
-                <th scope="col">화<small>07.14</small></th>
-                <th scope="col">수<small>07.15</small></th>
-                <th scope="col">목<small>07.16</small></th>
-                <th scope="col">금<small>07.17</small></th>
-              </tr>
-            </thead>
-
-            <tbody>
-              <tr>
-                <th scope="row">09:00 ~ 12:00</th>
-                <td></td>
-                <td class="cell--lime">🌿 Git &amp; AI 코딩<br>환경 구성</td>
-                <td class="cell--sky">💬 프롬프트 설계 &amp;<br>Context Engineering</td>
-                <td class="cell--peach">📊 데이터 분석 개요 및<br>기초 통계 Day 1</td>
-                <td></td>
-              </tr>
-
-              <tr>
-                <th scope="row">12:00 ~ 13:00</th>
-                <td></td>
-                <td colspan="3" class="lunch">점심시간 🍱</td>
-                <td></td>
-              </tr>
-
-              <tr>
-                <th scope="row">13:00 ~ 15:00</th>
-                <td></td>
-                <td class="cell--lime">🌿 Git &amp; AI 코딩<br>환경 구성</td>
-                <td class="cell--sky">💬 프롬프트 설계 &amp;<br>Context Engineering</td>
-                <td class="cell--peach">📊 데이터 분석 개요 및<br>기초 통계 Day 1</td>
-                <td></td>
-              </tr>
-
-              <tr>
-                <th scope="row">15:00 ~ 18:00</th>
-                <td></td>
-                <td>✍️ 실습 및 복습</td>
-                <td>👥 팀 과제 및 복습</td>
-                <td>👥 팀 과제 및 실습</td>
-                <td></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-      <section class="panel" id="weekPanel2">
-        <h2 class="section-title">2주차 <small>2026.07.20. ~ 07.24.</small></h2>
-        <div class="table-scroll">
-          <table class="schedule">
-            <caption>2주차 강의 시간표</caption>
-
-            <thead>
-              <tr>
-                <th scope="col">시간</th>
-                <th scope="col">월<small>07.20</small></th>
-                <th scope="col">화<small>07.21</small></th>
-                <th scope="col">수<small>07.22</small></th>
-                <th scope="col">목<small>07.23</small></th>
-                <th scope="col">금<small>07.24</small></th>
-              </tr>
-            </thead>
-
-            <tbody>
-              <tr>
-                <th scope="row">09:00 ~ 10:00</th>
-                <td rowspan="2" class="cell--peach">📊 데이터 분석 개요 및<br>기초 통계 Day 2</td>
-                <td rowspan="2" class="cell--lavender">🤖 LLM &amp; Transformer<br>아키텍처 Day 1</td>
-                <td rowspan="2" class="cell--lavender">🤖 LLM &amp; Transformer<br>아키텍처 Day 2</td>
-                <td class="cell--sky">🌐 Web 기초</td>
-                <td rowspan="2" class="cell--lime">⚙️ JavaScript 기초</td>
-              </tr>
-
-              <tr>
-                <th scope="row">10:00 ~ 12:00</th>
-                <td class="cell--sky">🏗️ HTML 기초 및 실습</td>
-              </tr>
-
-              <tr>
-                <th scope="row">12:00 ~ 13:00</th>
-                <td colspan="5" class="lunch">점심시간 🍱</td>
-              </tr>
-
-              <tr>
-                <th scope="row">13:00 ~ 15:00</th>
-                <td class="cell--peach">📊 데이터 분석 개요 및<br>기초 통계 Day 2</td>
-                <td class="cell--lavender">🤖 LLM &amp; Transformer<br>아키텍처 Day 1</td>
-                <td class="cell--lavender">🤖 LLM &amp; Transformer<br>아키텍처 Day 2</td>
-                <td rowspan="2" class="cell--pink">🎨 CSS 기초</td>
-                <td rowspan="2" class="cell--lime">⚙️ JavaScript 기초</td>
-              </tr>
-
-              <tr>
-                <th scope="row">15:00 ~ 18:00</th>
-                <td>👥 팀 과제 및 복습</td>
-                <td>👥 팀 과제 및 실습</td>
-                <td>👥 팀 과제 및 복습</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-      <p><a href="myCalendar.html" class="btn btn--ghost">← 캘린더로 돌아가기</a></p>
+      <p class="class-foot"><a href="myCalendar.html" class="btn btn--ghost">← 캘린더로 돌아가기</a></p>
 
     </main>
   </div>
@@ -190,9 +78,8 @@
       </div>
       <ul class="site-footer__links">
         <li><a href="mailto:roseprincess0331@gmail.com">이메일</a></li>
-        <li><a href="https://github.com" target="_blank" rel="noopener">GitHub</a></li>
-        <li><a href="signUp.html">회원가입</a></li>
-        <li><a href="guestbook.html">방명록</a></li>
+        <li><a href="https://github.com/inwoo-jang" target="_blank" rel="noopener">GitHub</a></li>
+        <li class="footer-signup"><a href="signUp.html">회원가입</a></li>
       </ul>
     </div>
     <p class="site-footer__copy">© 2026 장인우 · SKALA 4기</p>
@@ -200,6 +87,7 @@
 
   <script src="../script/auth.js"></script>
   <script src="../script/nav.js"></script>
+  <script src="../script/scheduleData.js"></script>
   <script src="../script/timetable.js"></script>
 </body>
 </html>

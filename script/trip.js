@@ -5,6 +5,15 @@
    내용은 HTML에 모두 적혀 있고 여기서는 표시만 제어한다.
    ========================================================== */
 
+/** 뷰어 지역 표기는 국기 아이콘(HTML)을 쓰므로 innerHTML로 그린다.
+    그룹 제목이 HTML로 새지 않도록 특수문자를 이스케이프한다. */
+function escapeHtml(text) {
+  return String(text)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+}
+
 var switchBox = document.querySelector(".switch");
 var regionBtns = document.querySelectorAll(".switch__btn");
 
@@ -119,6 +128,14 @@ function showRegion(region) {
   feedDomestic.hidden = isAbroad;
   countDomestic.hidden = isAbroad;
 
+  // 숨겨지는 쪽에서 재생 중이던 영상은 멈춘다 — 안 보이는데 소리만 나거나
+  // BGM과 겹치는 걸 막는다 (영상이 멈추면 BGM이 자연스럽게 이어진다)
+  var hiddenFeed = isAbroad ? feedDomestic : feedAbroad;
+  var hiddenVideos = hiddenFeed.querySelectorAll("video");
+  for (var v = 0; v < hiddenVideos.length; v++) {
+    if (!hiddenVideos[v].paused) { hiddenVideos[v].pause(); }
+  }
+
   // 토글 버튼 상태와 미끄러지는 배경 위치
   for (var i = 0; i < regionBtns.length; i++) {
     var on = (regionBtns[i].dataset.region === region);
@@ -214,7 +231,10 @@ function collectPhotos() {
     photos.push({
       src: img.getAttribute("src"),
       alt: img.getAttribute("alt"),
-      region: (isAbroad ? "🌏 해외" : "🇰🇷 국내") + (groupTitle ? " · " + groupTitle : ""),
+      region: (isAbroad
+                 ? '<span class="flag flag--world" role="img" aria-label="해외"></span> 해외'
+                 : '<span class="flag flag--kr" role="img" aria-label="대한민국"></span> 국내')
+              + (groupTitle ? " · " + escapeHtml(groupTitle) : ""),
       place: items[i].querySelector(".feed__place").textContent.trim(),
       sub: items[i].querySelector(".feed__sub").textContent.trim(),
       date: items[i].querySelector(".feed__date").textContent.trim(),
@@ -238,12 +258,15 @@ function showPhoto(index) {
 
   viewerImg.setAttribute("src", item.src);
   viewerImg.setAttribute("alt", item.alt);
-  viewerRegion.textContent = item.region;
+  viewerRegion.innerHTML = item.region;
   viewerPlace.textContent = item.place;
   viewerSub.textContent = item.sub;
   viewerDate.textContent = item.date;
   viewerCount.textContent = (index + 1) + " / " + photos.length;
 }
+
+/* 뒤로가기로 뷰어를 닫기 위해 히스토리 항목을 쌓았는지 */
+var viewerPushed = false;
 
 /** 뷰어 열기 */
 function openViewer(index) {
@@ -254,15 +277,31 @@ function openViewer(index) {
   feedDomestic.classList.add("is-hushed");
   viewer.hidden = false;
   viewerClose.focus();
+
+  // 브라우저 뒤로가기로 뷰어를 닫을 수 있게 히스토리 항목을 하나 쌓는다
+  if (!viewerPushed) {
+    viewerPushed = true;
+    history.pushState({ tripViewer: true }, "");
+  }
 }
 
-/** 목록으로 돌아가기 */
-function closeViewer() {
+/** 목록으로 돌아가기. fromPopstate=true면 이미 뒤로가기로 pop된 상태. */
+function closeViewer(fromPopstate) {
+  if (viewer.hidden) { return; }
+
   viewer.hidden = true;
   feedAbroad.classList.remove("is-hushed");
   feedDomestic.classList.remove("is-hushed");
 
   if (lastOpener) { lastOpener.focus(); }
+
+  // 버튼·Esc로 닫으면 쌓아둔 히스토리 항목을 되돌려 URL을 깔끔히 유지한다
+  if (viewerPushed && !fromPopstate) {
+    viewerPushed = false;
+    history.back();
+  } else {
+    viewerPushed = false;
+  }
 }
 
 if (viewer) {
@@ -286,6 +325,13 @@ if (viewer) {
   viewerNext.addEventListener("click", function () { showPhoto(current + 1); });
   viewerClose.addEventListener("click", closeViewer);
 
+  // 사진 자체를 눌러도 넘어간다 — 왼쪽 절반은 앞쪽, 오른쪽 절반은 뒤쪽
+  viewerImg.addEventListener("click", function (event) {
+    var rect = viewerImg.getBoundingClientRect();
+    if (event.clientX - rect.left > rect.width / 2) { showPhoto(current + 1); }
+    else { showPhoto(current - 1); }
+  });
+
   // 키보드 ← → Esc
   document.addEventListener("keydown", function (event) {
     if (viewer.hidden) { return; }
@@ -293,5 +339,10 @@ if (viewer) {
     if (event.key === "ArrowLeft")  { showPhoto(current - 1); }
     if (event.key === "ArrowRight") { showPhoto(current + 1); }
     if (event.key === "Escape")     { closeViewer(); }
+  });
+
+  // 브라우저 뒤로가기 → 뷰어가 열려 있으면 목록으로 닫는다
+  window.addEventListener("popstate", function () {
+    if (!viewer.hidden) { closeViewer(true); }
   });
 }

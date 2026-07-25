@@ -1,0 +1,34 @@
+/* ==========================================================
+   css/flags.css — 국기/지역 아이콘
+   OS마다 다르게(또는 알파벳 2글자로) 보이는 국기 이모지를 대체한다.
+   사용: <span class="flag flag--kr" role="img" aria-label="대한민국"></span>
+   ========================================================== */
+
+.flag {
+  display: inline-block;
+  width: 1.2em;
+  height: 0.8em;
+  vertical-align: -0.1em;
+  border-radius: 2px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  /* 흰 바탕 국기가 배경에 묻히지 않도록 얇은 테두리 */
+  box-shadow: 0 0 0 0.5px rgba(0, 0, 0, 0.14), 0 1px 1.5px rgba(0, 0, 0, 0.12);
+}
+
+/* 지구본(해외) — 둥근 아이콘이라 테두리 없이 원형으로 */
+.flag--world {
+  width: 0.8em;
+  border-radius: 50%;
+  box-shadow: none;
+  background-image: url("../media/icon/flags/world.svg");
+}
+
+.flag--kr { background-image: url("../media/icon/flags/kr.svg"); }
+.flag--cn { background-image: url("../media/icon/flags/cn.svg"); }
+.flag--jp { background-image: url("../media/icon/flags/jp.svg"); }
+.flag--vn { background-image: url("../media/icon/flags/vn.svg"); }
+.flag--it { background-image: url("../media/icon/flags/it.svg"); }
+.flag--in { background-image: url("../media/icon/flags/in.svg"); }
+.flag--th { background-image: url("../media/icon/flags/th.svg"); }

@@ -47,9 +47,10 @@ function renderCalendar(year, month) {
               String(month + 1).padStart(2, "0") + "-" +
               String(d).padStart(2, "0");
 
-    // 수업 기간 안의 평일만 수업일이다. 기간 밖은 색 없이 둔다.
+    // 실제 강의 일정(scheduleData.js)에 있는 날만 수업일이다.
     var inCourse = (iso >= CLASS_START && iso <= CLASS_END);
-    var hasClass = inCourse && !isWeekend;
+    var entry = (typeof SKALA_SCHEDULE !== "undefined") ? SKALA_SCHEDULE[iso] : null;
+    var hasClass = !!entry;
 
     var typeClass, tagText, moveTo;
     if (hasClass) {
@@ -176,8 +177,9 @@ function selectDate(iso, hasClass) {
   badge.textContent = isToday ? "Today" : "Selected";
   dateEl.textContent = formatFull(picked);
 
-  if (hasClass) {
-    bodyEl.innerHTML = "<p><strong>09:00 ~ 18:00</strong> SKALA 정규 수업</p>";
+  var entry = (typeof SKALA_SCHEDULE !== "undefined") ? SKALA_SCHEDULE[iso] : null;
+  if (entry) {
+    bodyEl.innerHTML = "<p><strong>09:00 ~ 18:00</strong> " + entry.topic + "</p>";
   } else {
     bodyEl.innerHTML = "<p>수업이 없는 날입니다.</p>";
   }
@@ -205,22 +207,21 @@ function showTodayOnHome() {
   if (!dateEl || !bodyEl) { return; }
 
   var now = new Date();
-  var isWeekend = (now.getDay() === 0 || now.getDay() === 6);
   var nowIso = now.getFullYear() + "-" +
                String(now.getMonth() + 1).padStart(2, "0") + "-" +
                String(now.getDate()).padStart(2, "0");
-  var hasClass = !isWeekend && nowIso >= CLASS_START && nowIso <= CLASS_END;
+  var entry = (typeof SKALA_SCHEDULE !== "undefined") ? SKALA_SCHEDULE[nowIso] : null;
 
   dateEl.textContent = formatFull(now);
 
-  if (hasClass) {
+  if (entry) {
     bodyEl.innerHTML =
-      "<p><strong>09:00 ~ 18:00</strong> SKALA 정규 수업 🕘</p>" +
+      "<p><strong>09:00 ~ 18:00</strong> " + entry.topic + " 🕘</p>" +
       '<p><a href="myClass.html">주간 시간표 보러가기</a></p>';
   } else {
     bodyEl.innerHTML =
       "<p>오늘은 수업이 없는 날입니다 🛋️</p>" +
-      '<p><a href="myHoliday.html">휴일 기록 보러가기</a></p>';
+      '<p><a href="myHoliday.html">휴일 일정 보러가기</a></p>';
   }
 }
 
