@@ -1,7 +1,8 @@
 /* ==========================================================
    script/timetable.js — 강의 일정 데이터로 주차별 시간표(표)를 그린다.
-   원본 주간 시간표 양식(09~12 / 점심 / 13~15 / 15~18 실습)을 그대로 쓰되,
+   주간 시간표 양식(오전 / 점심 12:20~13:40 / 오후 / 16~18 실습)을 쓰되,
    scheduleData.js 의 데이터로 전 주차를 채운다.
+   - SKALA_DAY_SESSIONS 에 세부 세션이 있는 날은 시간대별 목록으로 그린다.
    - ?date 없으면 전체 주차 / ?date 있으면 그 주차만 (주간).
    ========================================================== */
 
@@ -40,15 +41,41 @@ function ttWeekdays(mon) {
   return out;
 }
 
-/** 강의 주제 행 (09~12, 13~15) — 강의 없는 날은 빈 칸 */
-function ttTopicRow(label, cols) {
+/** 세부 세션이 있는 날이면 [from, to) 시간대의 세션 목록, 없으면 null */
+function ttSessions(iso, from, to) {
+  var list = (typeof SKALA_DAY_SESSIONS !== "undefined") ? SKALA_DAY_SESSIONS[iso] : null;
+  if (!list) { return null; }
+  var out = [];
+  for (var i = 0; i < list.length; i++) {
+    if (list[i].s >= from && list[i].s < to) { out.push(list[i]); }
+  }
+  return out;
+}
+
+/** 세션 목록 → 셀 안에 쌓이는 리스트 HTML */
+function ttSlotList(sessions) {
+  var html = '<ul class="tt-slots">';
+  for (var i = 0; i < sessions.length; i++) {
+    html += '<li><span class="tt-slots__time">' + sessions[i].s + '~' + sessions[i].e + '</span>' +
+            sessions[i].t + '</li>';
+  }
+  return html + '</ul>';
+}
+
+/** 강의 주제 행 (오전 / 오후) — 강의 없는 날은 빈 칸 */
+function ttTopicRow(label, cols, from, to) {
   var row = '<tr><th scope="row">' + label + '</th>';
   for (var i = 0; i < cols.length; i++) {
     var e = SKALA_SCHEDULE[cols[i]];
     if (e) {
       var color = SKALA_CAT_COLOR[e.category] || "peach";
       var emoji = TT_EMOJI[e.category] || "✨";
-      row += '<td class="cell--' + color + '">' + emoji + ' ' + e.topic + '</td>';
+      var sessions = ttSessions(cols[i], from, to);
+      if (sessions) {
+        row += '<td class="cell--' + color + ' tt-detail">' + ttSlotList(sessions) + '</td>';
+      } else {
+        row += '<td class="cell--' + color + '">' + emoji + ' ' + e.topic + '</td>';
+      }
     } else {
       row += '<td></td>';
     }
@@ -56,11 +83,14 @@ function ttTopicRow(label, cols) {
   return row + '</tr>';
 }
 
-/** 오후 실습 행 (15~18) — 강의 있는 날만 */
+/** 오후 실습 행 (16~18) — 강의 있는 날만 */
 function ttPracticeRow(cols) {
-  var row = '<tr><th scope="row">15:00 ~ 18:00</th>';
+  var row = '<tr><th scope="row">16:00 ~ 18:00</th>';
   for (var i = 0; i < cols.length; i++) {
-    row += SKALA_SCHEDULE[cols[i]] ? '<td>👥 실습 · 팀 과제</td>' : '<td></td>';
+    if (!SKALA_SCHEDULE[cols[i]]) { row += '<td></td>'; continue; }
+    var sessions = ttSessions(cols[i], "16:00", "24:00");
+    row += sessions ? '<td class="tt-detail">' + ttSlotList(sessions) + '</td>'
+                    : '<td>👥 실습 · 팀 과제</td>';
   }
   return row + '</tr>';
 }
@@ -87,12 +117,12 @@ if (weekListEl && typeof SKALA_WEEKS !== "undefined") {
     }
     html += '</tr></thead>';
 
-    /* 본문 — 09~12 / 점심 / 13~15 / 15~18 (원본 양식) */
+    /* 본문 — 오전 / 점심 / 오후 / 16~18 실습 */
     html += '<tbody>';
-    html += ttTopicRow("09:00 ~ 12:00", cols);
-    html += '<tr><th scope="row">12:00 ~ 13:00</th>' +
+    html += ttTopicRow("09:00 ~ 12:20", cols, "00:00", "12:20");
+    html += '<tr><th scope="row">12:20 ~ 13:40</th>' +
             '<td colspan="5" class="lunch">점심시간 🍱</td></tr>';
-    html += ttTopicRow("13:00 ~ 15:00", cols);
+    html += ttTopicRow("13:40 ~ 16:00", cols, "12:20", "16:00");
     html += ttPracticeRow(cols);
     html += '</tbody>';
 

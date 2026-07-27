@@ -3462,6 +3462,34 @@ td {
   color: var(--text-dim);
 }
 
+/* 세부 세션이 있는 날 — 시간·세션을 위에서부터 쌓는다 */
+.schedule td.tt-detail {
+  vertical-align: top;
+  height: auto;
+  padding: var(--sp-2) var(--sp-2);
+}
+
+.tt-slots {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 4px;
+}
+
+.tt-slots li {
+  font-size: 0.75rem;
+  line-height: 1.35;
+}
+
+.tt-slots__time {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.6563rem;
+  letter-spacing: .02em;
+  color: var(--text-dim);
+}
+
 .cell--sky      { background-color: var(--sky-50); }
 .cell--lime     { background-color: var(--lime-bg); }
 .cell--peach    { background-color: var(--peach-bg); }
